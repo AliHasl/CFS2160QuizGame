@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainMenu {
+
+    public JPanel getPanel1() {
+        return panel1;
+    }
+
+    private JPanel panel1;
+    private JButton startGameButton;
+    private JButton quitButton;
+
+    private static JFrame gameFrame;
+
+
+    private GameController currentGame;
+
+    public static void main(String[] args) {
+
+        GameController currentGame = new GameController();
+
+        gameFrame = new JFrame("MainMenu");
+        gameFrame.setContentPane(new MainMenu().panel1);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.pack();
+        gameFrame.setVisible(true);
+    }
+
+
+    public MainMenu() {
+            startGameButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    gameFrame.setContentPane(new GameSetup().getPanel1());
+                    gameFrame.pack();
+
+                }
+            });
+            quitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+
+                }
+            });
+        }
+
+}
