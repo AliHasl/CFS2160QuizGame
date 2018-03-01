@@ -35,9 +35,12 @@ public class GameSetup {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JFrame thisframe = new MainMenu().getGameFrame();
                 nextPanel = new MainMenu().getPanel1();
-                MainMenu thisPanel = new MainMenu();
-                thisPanel.setContentPane(nextPanel);
+                thisframe.setContentPane(nextPanel);
+                thisframe.pack();
+                thisframe.setVisible(true);
+
             }
         });
         startGameButton.addActionListener(new ActionListener() {

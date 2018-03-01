@@ -12,6 +12,10 @@ public class MainMenu {
     private JButton startGameButton;
     private JButton quitButton;
 
+    public static JFrame getGameFrame() {
+        return gameFrame;
+    }
+
     private static JFrame gameFrame;
 
 
@@ -21,7 +25,7 @@ public class MainMenu {
 
         GameController currentGame = new GameController();
 
-        gameFrame = new JFrame("MainMenu");
+        gameFrame = new JFrame("Sexy Quiz Game");
         gameFrame.setContentPane(new MainMenu().panel1);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.pack();
