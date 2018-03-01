@@ -8,6 +8,7 @@ public class Demo {
 
     public static void main(String[] args) {
         gameController = new GameController();
+        new MainMenu().display();
 
     }
 }

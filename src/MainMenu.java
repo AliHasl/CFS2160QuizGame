@@ -4,9 +4,6 @@ import java.awt.event.ActionListener;
 
 public class MainMenu {
 
-    public MainMenu(GameController currentGame) {
-        this.currentGame = currentGame;
-    }
 
     public JPanel getPanel1() {
         return panel1;
@@ -23,10 +20,15 @@ public class MainMenu {
     private static JFrame gameFrame;
 
 
+
+
     private GameController currentGame;
 
+    public GameController getCurrentGame() {
+        return currentGame;
+    }
 
-    public void MainMenu(){
+    public void display(){
         gameFrame = new JFrame("Sexy Quiz Game");
         gameFrame.setContentPane(new MainMenu().panel1);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +42,7 @@ public class MainMenu {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    gameFrame.setContentPane(new GameSetup().getPanel1());
+                    gameFrame.setContentPane(new GameSetupGUI().getPanel1());
                     gameFrame.pack();
 
                 }
@@ -48,6 +50,7 @@ public class MainMenu {
             quitButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
 
 
                 }

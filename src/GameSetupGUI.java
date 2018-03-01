@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameSetup {
+public class GameSetupGUI {
     public JPanel getPanel1() {
         return panel1;
     }
@@ -17,14 +17,28 @@ public class GameSetup {
 
     private JPanel nextPanel;
     private JFrame thisPanel;
+    private GameController gameController;
+    private DefaultListModel<Player> team;
+    //private Player player;
 
-    public GameSetup() {
+    public GameSetupGUI() {
+        gameController = new GameController();
+        team =  gameController.getPlayers();
+
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Player player = new Player(nameField.getText());
+
+
+                team.addElement(player);
+                playerEntry.setModel(team);
+
 
             }
         });
+
+
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,13 +1,17 @@
 import javax.swing.*;
 
-public class GameController {
+public class GameController extends DefaultListModel<Player> {
 
     private Player player;
     private DefaultListModel<Player>players;
 
     public GameController() {
         DefaultListModel<Player> players = new DefaultListModel<Player>();
-        new MainMenu().MainMenu();
+
+    }
+
+    public DefaultListModel<Player> getPlayers() {
+        return players;
     }
 
     public void addToTeam(){
