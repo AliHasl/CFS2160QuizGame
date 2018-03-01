@@ -4,6 +4,10 @@ import java.awt.event.ActionListener;
 
 public class MainMenu {
 
+    public MainMenu(GameController currentGame) {
+        this.currentGame = currentGame;
+    }
+
     public JPanel getPanel1() {
         return panel1;
     }
@@ -21,10 +25,8 @@ public class MainMenu {
 
     private GameController currentGame;
 
-    public static void main(String[] args) {
 
-        GameController currentGame = new GameController();
-
+    public void MainMenu(){
         gameFrame = new JFrame("Sexy Quiz Game");
         gameFrame.setContentPane(new MainMenu().panel1);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
