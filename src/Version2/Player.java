@@ -7,9 +7,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 
     public Player(String name) {
@@ -20,9 +18,6 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getScore() {
         return score;
