@@ -1,3 +1,7 @@
+package Version1;
+
+import Version2.MainMenu;
+
 /**
  * Created by u1773783 on 01/03/2018.
  */

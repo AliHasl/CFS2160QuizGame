@@ -1,3 +1,7 @@
+package Version2;
+
+import Version1.GameController;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +26,7 @@ public class MainMenu {
 
 
 
-    private GameController currentGame;
+    private Version1.GameController currentGame;
 
     public GameController getCurrentGame() {
         return currentGame;

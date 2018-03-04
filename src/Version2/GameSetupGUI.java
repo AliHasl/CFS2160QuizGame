@@ -1,3 +1,8 @@
+package Version2;
+
+import Version1.GameController;
+import Version1.Player;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +22,8 @@ public class GameSetupGUI {
 
     private JPanel nextPanel;
     private JFrame thisPanel;
-    private GameController gameController;
-    private DefaultListModel<Player> team;
+    private Version1.GameController gameController;
+    private DefaultListModel<Version1.Player> team;
     //private Player player;
 
     public GameSetupGUI() {
@@ -28,7 +33,7 @@ public class GameSetupGUI {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Player player = new Player(nameField.getText());
+                Version1.Player player = new Player(nameField.getText());
 
 
                 team.addElement(player);

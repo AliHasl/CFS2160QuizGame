@@ -1,3 +1,5 @@
+package Version1;
+
 import javax.swing.*;
 
 public class GameController extends DefaultListModel<Player> {
