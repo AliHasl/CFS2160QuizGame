@@ -6,6 +6,8 @@ public class QuestionDatabase {
     private int answer1 = 4;
     private String[] question2 = {"Hello", "how are you", "my", "name", "is"};
     private int answer2 = 1;
+
+
     public String[] getQuestion1() {
         return question1;
     }

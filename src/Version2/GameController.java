@@ -1,17 +1,27 @@
 package Version2;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameController extends DefaultListModel<Player> {
 
     private Player player;
     private DefaultListModel<Player> players;
     private QuestionDatabase questionDatabase;
-    private int guess;
+    private String guess;
     private String[] currentQuestion;
+    private String currentAnswer;
 
-    public void setGuess(int guess) {
-        this.guess = guess;
+    public ArrayList<String> getOptions() {
+        return options;
+    }
+
+    private ArrayList<String> options;
+
+
+    public void setGuess(String attempt) {
+        this.guess = attempt;
     }
 
 
@@ -23,8 +33,8 @@ public class GameController extends DefaultListModel<Player> {
 
     }
 
-    public boolean checkAnswer(QuestionDatabase question){
-        if(guess == (int)question[5])
+    public boolean checkAnswer(){
+        if(guess == currentQuestion[1])
             return true;
         else
             return false;
@@ -44,15 +54,27 @@ public class GameController extends DefaultListModel<Player> {
         this.players.removeElementAt(selectionNumber);
     }
 
+public ArrayList<String> shuffleOptions(){
+        options = new ArrayList<>();
+        options.add(currentQuestion[1]);
+        options.add(currentQuestion[2]);
+        options.add(currentQuestion[3]);
+        options.add(currentQuestion[4]);
+        Collections.shuffle(options);
+        return options;
+
+}
 
 
-    public String[] presentQuestion(Player player, int category) {
+    public String[] getQuestion(Player player, int category) {
         //player.getScore();
         if (category == 0) {
             currentQuestion = questionDatabase.getQuestion1();
+            currentAnswer = questionDatabase.getQuestion1()[1];
             return currentQuestion;
         } else if (category == 1) {
             currentQuestion = questionDatabase.getQuestion2();
+            currentAnswer = questionDatabase.getQuestion2()[1];
             return currentQuestion;
         }
 

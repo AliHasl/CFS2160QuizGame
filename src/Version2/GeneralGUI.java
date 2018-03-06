@@ -3,6 +3,7 @@ package Version2;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GeneralGUI {
     private JPanel GeneralGUI;
@@ -51,18 +52,18 @@ public class GeneralGUI {
         thisFrame.setVisible(true);
     }
 
-//    public String[] getQuestion(int category){
-  //      gameController.presentQuestion(currentPlayer, category);
-   // }
+
 
     public void formatQuestion(int category){
-        currentQuestion = gameController.presentQuestion(currentPlayer,category);
+        currentQuestion = gameController.getQuestion(currentPlayer,category);
         this.questionField.setText(currentQuestion[0]);
 
-        this.option1.setText(currentQuestion[1]);
-        this.option2.setText(currentQuestion[2]);
-        this.option3.setText(currentQuestion[3]);
-        this.option4.setText(currentQuestion[4]);
+
+        ArrayList<String> options =  gameController.shuffleOptions();
+        this.option1.setText(options.get(0));
+        this.option2.setText(options.get(1));
+        this.option3.setText(options.get(2));
+        this.option4.setText(options.get(3));
 
     }
 
@@ -198,26 +199,51 @@ public class GeneralGUI {
         option1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                gameController.setGuess(1);
+                gameController.setGuess(option1.getText());
+                if(gameController.checkAnswer()){
+                    System.out.println("correct");
+                }
+                else{
+                    System.out.println("wong");
+                }
 
             }
         });
         option2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                gameController.setGuess(2);
+                gameController.setGuess(option2.getText());
+
+                if(gameController.checkAnswer()){
+                    System.out.println("correct");
+                }
+                else{
+                    System.out.println("wong");
+                }
             }
         });
         option3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                gameController.setGuess(3);
+                gameController.setGuess(option3.getText());
+                if(gameController.checkAnswer()){
+                    System.out.println("correct");
+                }
+                else{
+                    System.out.println("wong");
+                }
             }
         });
         option4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                gameController.setGuess(4);
+                gameController.setGuess(option4.getText());
+                if(gameController.checkAnswer()){
+                    System.out.println("correct");
+                }
+                else{
+                    System.out.println("wong");
+                }
             }
         });
     }
