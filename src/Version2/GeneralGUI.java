@@ -329,6 +329,7 @@ public class GeneralGUI {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                resetQuestionPanel();
                 if(currentPlayer.equals(gameController.getPlayers().lastElement())){
                     if(currentPlayer.getScore() == 15){
                         //TODO WIN SCREEN
@@ -336,7 +337,7 @@ public class GeneralGUI {
                     else{
                         currentPlayer = gameController.getPlayers().firstElement();
                         playerIndex = 0;
-                        resetQuestionPanel();
+
                         categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                         thisFrame.setContentPane(categorySelect);
                         thisFrame.pack();
