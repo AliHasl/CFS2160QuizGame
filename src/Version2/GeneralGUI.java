@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GeneralGUI {
     private JPanel GeneralGUI;
@@ -41,6 +42,8 @@ public class GeneralGUI {
     private JButton anotherGameButton;
     private JButton mainMenuButton;
     private JList resultsList;
+    private JButton half50Button;
+    private JButton askTheAudienceButton;
 
 
     private static JFrame thisFrame;
@@ -79,7 +82,15 @@ public class GeneralGUI {
         thisFrame.setVisible(true);
     }
 
+    private void setHalf50Button(Player player){
+        if(player.isFiftyFifty()){
+            half50Button.setEnabled(true);
+        }
+        else{
+            half50Button.setEnabled(false);
+        }
 
+    }
 
     public void formatQuestion(int category){
         currentQuestion = gameController.getQuestion(currentPlayer,category);
@@ -212,6 +223,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(0);
+                setHalf50Button(currentPlayer);
                 thisFrame.pack();
                 //thisFrame.setVisible(true);
 
@@ -223,6 +235,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(1);
+                setHalf50Button(currentPlayer);
                 thisFrame.pack();
                 //thisFrame.setVisible(true);
             }
@@ -232,6 +245,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(2);
+                setHalf50Button(currentPlayer);
                 thisFrame.pack();
                 //thisFrame.setVisible(true);
             }
@@ -242,7 +256,9 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(3);
+                setHalf50Button(currentPlayer);
                 thisFrame.pack();
+
                 //thisFrame.setVisible(true);
             }
         });
@@ -364,6 +380,80 @@ public class GeneralGUI {
             }
         });
 
+        half50Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Random rn = new Random();
+                int random = rn.nextInt(4)+1;
+
+                int cycles = 0;
+                while (cycles < 2) {
+                    System.out.println(random);
+                    if (random == 1) {
+                        if (option1.isEnabled()) {                               //is it enabled
+                            if (gameController.checkAnswer(option1.getText())) { //Is it the correct answer
+                                random = rn.nextInt(4) + 1;               //if so new random int
+                            } else {
+                                option1.setEnabled(false);                       //If not the answer, disable button
+                                random = rn.nextInt(4) + 1;              //New random number
+                                cycles++;                                       //increase cycle count
+                            }
+
+                        }
+                        else {
+                            random = rn.nextInt(4) + 1;                 //if disabled get new random number
+                        }
+                    }
+
+                    else if (random == 2) {
+                        if (option2.isEnabled()) {
+                            if (gameController.checkAnswer(option2.getText())) {
+                                random = rn.nextInt(4) + 1;
+                            } else {
+                                option2.setEnabled(false);
+                                random = rn.nextInt(4) + 1;
+                                cycles++;
+                            }
+                        } else {
+                            random = rn.nextInt(4) + 1;
+                        }
+                    }
+                    else if (random == 3) {
+                        if (option3.isEnabled()) {
+                            if (gameController.checkAnswer(option3.getText())) {
+                                random = rn.nextInt(4) + 1;
+                            } else {
+                                option3.setEnabled(false);
+                                random = rn.nextInt(4) + 1;
+                                cycles++;
+                            }
+                        } else {
+                            random = rn.nextInt(4) + 1;
+                        }
+                    }
+
+                    else if(random == 4) {
+
+                        if (option4.isEnabled()) {
+                            if (gameController.checkAnswer(option4.getText())) {
+                                random = rn.nextInt(4) + 1;
+                            } else {
+                                option4.setEnabled(false);
+                                random = rn.nextInt(4) + 1;
+                                cycles++;
+                            }
+                        } else {
+                            random = rn.nextInt(4) + 1;
+                        }
+                    }
+
+                }
+                currentPlayer.setFiftyFifty(false);
+                half50Button.setEnabled(false);
+            }
+
+        });
+
         /**
          * Methods for resultsPanel
          */
@@ -380,5 +470,8 @@ public class GeneralGUI {
 
             }
         });
+
+
+
     }
 }

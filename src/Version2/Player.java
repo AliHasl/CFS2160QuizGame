@@ -6,6 +6,17 @@ public class Player implements Comparable<Player>{
     private int score;
     private boolean gameOver;
     private int difficulty;
+
+    public boolean isFiftyFifty() {
+        return fiftyFifty;
+    }
+
+    public void setFiftyFifty(boolean fiftyFifty) {
+        this.fiftyFifty = fiftyFifty;
+    }
+
+    private boolean fiftyFifty;
+
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
@@ -34,6 +45,7 @@ public class Player implements Comparable<Player>{
         this.score = 0;
         this.difficulty = 0;
         this.gameOver = false;
+        this.fiftyFifty = true;
     }
 
     public String getName() {
