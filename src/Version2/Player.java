@@ -1,16 +1,24 @@
 package Version2;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
     private String name;
     private int score;
     private boolean gameOver;
+    private int difficulty;
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
 
     public int getDifficulty() {
         return difficulty;
     }
 
-    private int difficulty;
+    public String resultString(){
+
+        return  "Player" + name + " " + score;
+    }
 
     @Override
     public String toString() {
@@ -39,5 +47,17 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int compareTo(Player player){
+        if(player.score > this.score) {
+            return 1;
+        }
+        else if(player.score < this.score){
+            return -1;
+        }
+        else{
+            return 0;
+        }
     }
 }

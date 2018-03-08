@@ -37,6 +37,10 @@ public class GeneralGUI {
     private JButton continueButton;
 
     private JPanel titleImagePanel;
+    private JPanel resultsPanel;
+    private JButton anotherGameButton;
+    private JButton mainMenuButton;
+    private JList resultsList;
 
 
     private static JFrame thisFrame;
@@ -331,7 +335,11 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 resetQuestionPanel();
                 if(currentPlayer.equals(gameController.getPlayers().lastElement())){
-                    if(currentPlayer.getScore() == 15){
+                    if(currentPlayer.getScore() == 2){
+                        thisFrame.setContentPane(resultsPanel);
+                        gameController.sortResults();
+                        resultsList.setModel(gameController.getPlayers());
+                        thisFrame.pack();
                         //TODO WIN SCREEN
                     }
                     else{
@@ -353,6 +361,23 @@ public class GeneralGUI {
                     thisFrame.pack();
                     //thisFrame.setVisible(true);
                 }
+            }
+        });
+
+        /**
+         * Methods for resultsPanel
+         */
+        anotherGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameController.resetScores();
+                currentPlayer = gameController.getPlayers().firstElement();
+                playerIndex = 0;
+                //JLabel playerTurn = new JLabel("Player " + currentPlayer.getName() + "'s turn.");
+                categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
+                thisFrame.setContentPane(categorySelect);
+                thisFrame.pack();
+
             }
         });
     }

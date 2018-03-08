@@ -2,6 +2,7 @@ package Version2;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 public class GameController extends DefaultListModel<Player> {
@@ -59,6 +60,28 @@ public class GameController extends DefaultListModel<Player> {
     public void removeFromTeam(int selectionNumber) {
 
         this.players.removeElementAt(selectionNumber);
+    }
+
+    public void resetScores(){
+        for(int i = 0; i < players.size();i++){
+            this.players.getElementAt(i).setScore(0);
+            this.players.getElementAt(i).setDifficulty(0);
+        }
+    }
+
+public void sortResults(){
+    ArrayList<Player> list = new ArrayList<>();
+
+    for(int i = 0; i < this.players.size(); i++)
+    {
+        list.add(players.getElementAt(i));
+        this.players.remove(i);
+    }
+
+    Collections.sort(list);
+        for(Player player: list){
+            this.players.addElement(player);
+        }
     }
 
 public ArrayList<String> shuffleOptions(String[] currentQuestion){
