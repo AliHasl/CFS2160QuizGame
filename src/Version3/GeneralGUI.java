@@ -1,4 +1,5 @@
-package Version2;
+package Version3;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -46,35 +47,39 @@ public class GeneralGUI {
     private JButton askTheAudienceButton;
 
 
+    public static JFrame getThisFrame() {
+        return thisFrame;
+    }
+
     private static JFrame thisFrame;
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
     private GameController gameController;
     private Player currentPlayer;
     private int playerIndex;
 
 
-
     private String[] currentQuestion;
 
     /**
-     *Method to start the GUI
-     *
+     * Method to start the GUI
      */
 
-    public void display(){
+    public void display() {
 
         thisFrame = new JFrame();
         try {
-            BufferedImage titleImage = ImageIO.read(new File("src/Version2/Bamboozle.jpg"));
+            BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
             JLabel titleImageLabel = new JLabel(new ImageIcon(titleImage));
             titleImagePanel.add(titleImageLabel);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find stupid file");
+        } catch (IOException ex) {
+            System.out.println("error reading file");
         }
-
-            catch(FileNotFoundException ex) {
-                System.out.println("Unable to find stupid file");
-            }
-        catch (IOException ex){
-                System.out.println("error reading file");
-            }
 
         thisFrame.setContentPane(mainMenu);
         thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,22 +87,21 @@ public class GeneralGUI {
         thisFrame.setVisible(true);
     }
 
-    private void setHalf50Button(Player player){
-        if(player.isFiftyFifty()){
+    private void setHalf50Button(Player player) {
+        if (player.isFiftyFifty()) {
             half50Button.setEnabled(true);
-        }
-        else{
+        } else {
             half50Button.setEnabled(false);
         }
 
     }
 
-    public void formatQuestion(int category){
-        currentQuestion = gameController.getQuestion(currentPlayer,category);
+    public void formatQuestion(int category) {
+        currentQuestion = gameController.getQuestion(currentPlayer, category);
         this.questionField.setText(currentQuestion[2]);
 
 
-        ArrayList<String> options =  gameController.shuffleOptions(currentQuestion);
+        ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
 
         this.option1.setText(options.get(0));
         this.option2.setText(options.get(1));
@@ -106,7 +110,7 @@ public class GeneralGUI {
 
     }
 
-    private void resetQuestionPanel(){
+    private void resetQuestionPanel() {
         continueButton.setEnabled(false);
         option1.setEnabled(true);
         option2.setEnabled(true);
@@ -118,7 +122,7 @@ public class GeneralGUI {
         option4.setBackground(null);
     }
 
-    private void questionAnswered(){
+    private void questionAnswered() {
         continueButton.setEnabled(true);
         option1.setEnabled(false);
         option2.setEnabled(false);
@@ -132,7 +136,7 @@ public class GeneralGUI {
      */
 
     public GeneralGUI() {
-       // thisFrame = new JFrame("GeneralGUI");
+        // thisFrame = new JFrame("GeneralGUI");
         //playerList = new JList();
         gameController = new GameController();
         //QuestionDatabase questionDatabase = new QuestionDatabase();
@@ -176,8 +180,6 @@ public class GeneralGUI {
                 gameController.addToTeam(player);
 
 
-
-
             }
         });
 
@@ -186,11 +188,10 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
 
                 int selectionNumber = playerList.getSelectedIndex();
-                if(selectionNumber == -1){
-                    JOptionPane.showMessageDialog(thisFrame,"Please select a player to remove.");
+                if (selectionNumber == -1) {
+                    JOptionPane.showMessageDialog(thisFrame, "Please select a player to remove.");
 
-                }
-                else {
+                } else {
                     gameController.removeFromTeam(selectionNumber);
                 }
             }
@@ -199,10 +200,9 @@ public class GeneralGUI {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(gameController.getPlayers().size() == 0){
-                    JOptionPane.showMessageDialog(thisFrame,"You must create at least one player to proceed.");
-                }
-                else {
+                if (gameController.getPlayers().size() == 0) {
+                    JOptionPane.showMessageDialog(thisFrame, "You must create at least one player to proceed.");
+                } else {
                     currentPlayer = gameController.getPlayers().firstElement();
                     playerIndex = 0;
                     //JLabel playerTurn = new JLabel("Player " + currentPlayer.getName() + "'s turn.");
@@ -272,14 +272,13 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 //gameController.setGuess(option1.getText());
                 questionAnswered();
-                if(gameController.checkAnswer(option1.getText())){
+                if (gameController.checkAnswer(option1.getText())) {
                     option1.setBackground(Color.GREEN);
                     System.out.println("correct");
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
 
-                }
-                else{
+                } else {
                     System.out.println("wong");
                     option1.setBackground(Color.RED);
                     currentPlayer.setGameOver(true);
@@ -292,13 +291,12 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 //gameController.setGuess(option2.getText());
                 questionAnswered();
-                if(gameController.checkAnswer(option2.getText())){
+                if (gameController.checkAnswer(option2.getText())) {
                     System.out.println("correct");
                     option2.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
-                }
-                else{
+                } else {
                     System.out.println("wong");
                     option2.setBackground(Color.RED);
                     currentPlayer.setGameOver(true);
@@ -310,13 +308,12 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 //gameController.setGuess(option3.getText());
                 questionAnswered();
-                if(gameController.checkAnswer(option3.getText())){
+                if (gameController.checkAnswer(option3.getText())) {
                     System.out.println("correct");
                     option3.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
-                }
-                else{
+                } else {
                     System.out.println("wong");
                     option3.setBackground(Color.RED);
                     currentPlayer.setGameOver(true);
@@ -326,18 +323,15 @@ public class GeneralGUI {
         option4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               // gameController.setGuess(option4.getText());
+                // gameController.setGuess(option4.getText());
                 questionAnswered();
-                if(gameController.checkAnswer(option4.getText())){
+                if (gameController.checkAnswer(option4.getText())) {
                     System.out.println("correct");
                     option4.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
 
-
-
-                }
-                else{
+                } else {
                     System.out.println("wong");
                     option4.setBackground(Color.RED);
                     currentPlayer.setGameOver(true);
@@ -350,15 +344,14 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 resetQuestionPanel();
-                if(currentPlayer.equals(gameController.getPlayers().lastElement())){
-                    if(currentPlayer.getScore() == 2){
+                if (currentPlayer.equals(gameController.getPlayers().lastElement())) {
+                    if (currentPlayer.getScore() == 2) {
                         thisFrame.setContentPane(resultsPanel);
                         gameController.sortResults();
                         resultsList.setModel(gameController.getPlayers());
                         thisFrame.pack();
                         //TODO WIN SCREEN
-                    }
-                    else{
+                    } else {
                         currentPlayer = gameController.getPlayers().firstElement();
                         playerIndex = 0;
 
@@ -368,10 +361,9 @@ public class GeneralGUI {
                         //thisFrame.setVisible(true);
                     }
 
-                }
-            else{
+                } else {
                     currentPlayer = gameController.getPlayers().elementAt(playerIndex + 1);
-                    playerIndex ++;
+                    playerIndex++;
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
@@ -384,7 +376,7 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Random rn = new Random();
-                int random = rn.nextInt(4)+1;
+                int random = rn.nextInt(4) + 1;
 
                 int cycles = 0;
                 while (cycles < 2) {
@@ -399,13 +391,10 @@ public class GeneralGUI {
                                 cycles++;                                       //increase cycle count
                             }
 
-                        }
-                        else {
+                        } else {
                             random = rn.nextInt(4) + 1;                 //if disabled get new random number
                         }
-                    }
-
-                    else if (random == 2) {
+                    } else if (random == 2) {
                         if (option2.isEnabled()) {
                             if (gameController.checkAnswer(option2.getText())) {
                                 random = rn.nextInt(4) + 1;
@@ -417,8 +406,7 @@ public class GeneralGUI {
                         } else {
                             random = rn.nextInt(4) + 1;
                         }
-                    }
-                    else if (random == 3) {
+                    } else if (random == 3) {
                         if (option3.isEnabled()) {
                             if (gameController.checkAnswer(option3.getText())) {
                                 random = rn.nextInt(4) + 1;
@@ -430,9 +418,7 @@ public class GeneralGUI {
                         } else {
                             random = rn.nextInt(4) + 1;
                         }
-                    }
-
-                    else if(random == 4) {
+                    } else if (random == 4) {
 
                         if (option4.isEnabled()) {
                             if (gameController.checkAnswer(option4.getText())) {
@@ -459,7 +445,7 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                PopUpAudience audience = new PopUpAudience();
+                PopUpAudience audience = new PopUpAudience(gameController);
                 audience.pack();
                 //audience.setSize(250,125);
                 audience.setVisible(true);
@@ -483,7 +469,6 @@ public class GeneralGUI {
 
             }
         });
-
 
 
     }

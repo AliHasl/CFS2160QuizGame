@@ -11,6 +11,16 @@ public class GameController extends DefaultListModel<Player> {
     private DefaultListModel<Player> players;
     private QuestionDatabase questionDatabase;
 
+    public String[] getQuestionOptions() {
+        return questionOptions;
+    }
+
+    public void setQuestionOptions(String[] questionOptions) {
+        this.questionOptions = questionOptions;
+    }
+
+    private String[] questionOptions;
+
 
 
 

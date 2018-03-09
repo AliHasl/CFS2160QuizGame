@@ -9,19 +9,28 @@ public class GameController extends DefaultListModel<Player> {
     private Player player;
     private DefaultListModel<Player> players;
     private QuestionDatabase questionDatabase;
-
+    private String[] currentQuestionOptions;
 
 
 
     private String[] currentQuestion;
+    private ArrayList<String> options;
 
+    public String[] getCurrentQuestionOptions() {
+        return currentQuestionOptions;
+    }
+
+    public void setCurrentQuestionOptions(String[] currentQuestionOptions) {
+        this.currentQuestionOptions = currentQuestionOptions;
+    }
+
+    public String[] getCurrentQuestion() {
+        return currentQuestion;
+    }
 
     public ArrayList<String> getOptions() {
         return options;
     }
-
-    private ArrayList<String> options;
-
 
 
     public void setCurrentQuestion(String[] currentQuestion) {
@@ -34,11 +43,11 @@ public class GameController extends DefaultListModel<Player> {
         questionDatabase.setAllCategoryQuestions();
         Player bob = new Player("bob");
         players.addElement(bob);
-
+        options = new ArrayList<>();
     }
 
-    public boolean checkAnswer(String guess){
-        if(guess.equals(currentQuestion[3]))
+    public boolean checkAnswer(String guess) {
+        if (guess.equals(currentQuestion[3]))
             return true;
         else
             return false;
@@ -47,8 +56,6 @@ public class GameController extends DefaultListModel<Player> {
     public DefaultListModel<Player> getPlayers() {
         return players;
     }
-
-
 
 
     public void addToTeam(Player player) {
@@ -61,30 +68,29 @@ public class GameController extends DefaultListModel<Player> {
         this.players.removeElementAt(selectionNumber);
     }
 
-    public void resetScores(){
-        for(int i = 0; i < players.size();i++){
+    public void resetScores() {
+        for (int i = 0; i < players.size(); i++) {
             this.players.getElementAt(i).setScore(0);
             this.players.getElementAt(i).setDifficulty(0);
         }
     }
 
-public void sortResults(){
-    ArrayList<Player> list = new ArrayList<>();
+    public void sortResults() {
+        ArrayList<Player> list = new ArrayList<>();
 
-    for(int i = 0; i < this.players.size(); i++)
-    {
-        list.add(players.getElementAt(i));
-        this.players.remove(i);
-    }
+        for (int i = 0; i < this.players.size(); i++) {
+            list.add(players.getElementAt(i));
+            this.players.remove(i);
+        }
 
-    Collections.sort(list);
-        for(Player player: list){
+        Collections.sort(list);
+        for (Player player : list) {
             this.players.addElement(player);
         }
     }
 
-public ArrayList<String> shuffleOptions(String[] currentQuestion){
-        options = new ArrayList<>();
+    public ArrayList<String> shuffleOptions(String[] currentQuestion) {
+
         options.add(currentQuestion[3]);
         options.add(currentQuestion[4]);
         options.add(currentQuestion[5]);
@@ -92,7 +98,7 @@ public ArrayList<String> shuffleOptions(String[] currentQuestion){
         Collections.shuffle(options);
         return options;
 
-}
+    }
 
 
     public String[] getQuestion(Player player, int category) {
@@ -100,8 +106,6 @@ public ArrayList<String> shuffleOptions(String[] currentQuestion){
         currentQuestion = questionDatabase.getQuestionFromCategory(category, player.getDifficulty());
         return currentQuestion;
     }
-
-
 
 
 }

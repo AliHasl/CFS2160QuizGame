@@ -1,5 +1,7 @@
 package Version2;
 
+import Version3.GeneralGUI;
+
 /**
  * Created by u1773783 on 01/03/2018.
  */

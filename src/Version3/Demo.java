@@ -1,7 +1,5 @@
 package Version3;
 
-import Version2.GeneralGUI;
-
 /**
  * Created by u1773783 on 01/03/2018.
  */

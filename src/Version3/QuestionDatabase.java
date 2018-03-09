@@ -76,7 +76,7 @@ public class QuestionDatabase {
 
 private void setCategoryQuestions(int category){
         try {
-            File file = new File("src/Version2/Questions.txt");
+            File file = new File("res/Questions.txt");
             Scanner fileIn = new Scanner(file);
             switch (category) {
                 case 0: while(fileIn.hasNextLine() != false){
@@ -117,7 +117,7 @@ private void setCategoryQuestions(int category){
         try {
             //String fileName = "src/Version2/Questions.txt";
             //FileReader reader = new FileReader(fileName);
-            File file = new File("src/Version2/Questions.txt");
+            File file = new File("res/Questions.txt");
             //Scanner fileIn = new Scanner(new File("Questions.txt"));
             Scanner fileIn = new Scanner(file);
             //String[] questionParts;// = fileIn.nextLine().split(",");
