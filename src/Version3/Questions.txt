@@ -1,0 +1,57 @@
+0,0,Who is the Nintendo mascot character?,Mario,Sonic,Crash Bandicoot,Micky Mouse
+0,0,What does the acronym NES stand for?,Nintendo Entertainment System, Nintendo Education Service, Not Enough Salsa, Never Ever Salty
+0,0,What was Nintendo's most popular top down adventure game?,Zelda,Sonic,Double Dragon,StarFox
+0,0,Who was Mario's first victim?,Goomba,Koopa Troopa,Bowser,Bullet Bill
+0,1,How fast can a person complete Super Mario Bros.?,5 min,7 min,3 min,10 min
+0,1,How many buttons were on the NES controller?,2,4,6,8
+0,1,Who was Nintendo's first villain?, Donkey Kong, Bowser, Dr Robotonik, LeChuck Threepwood
+0,1,Project Dolphin was the codename for which system?,GameCube,N64,Gameboy Advance,Super Nintendo
+0,1,How many Pokemons were available in the original Pokemons game?,151,200,75,500
+0,1,How did Nintendo start its' business?,Playing Cards,Video Games,Movies,Comics
+0,1,Where is the Nintendo headquaters?,Kyoto,Tokyo,Osaka,Fukuoka
+0,2,When was Nintendo founded?,1889,1970,1953,1935
+0,2,Mario is to Wario as Luigi is to ...?,WaLuigi,Wuigi,Luigi-Wu,Ruigi
+0,2,Who was the first damsel in distress?,Daisy,Peach,Rosalina,Luigi
+0,2,What was Luigi's first stand alone game?,Mario's Missing,Luigi's Mansion, Super Luigi Bros.,Dr.Luigi
+0,2,How much extra RAM did the Expansion Pak add to the N64?,4Mb,2Mb,512Mb,64Mb
+1,0,Who was Sega's original mascot?,Alex Kidd,Sonic,Shinobi,Neptune
+1,0,Which console did not get a stand alone Sonic game?,Saturn,MegaDrive,MasterSystem,Dreamcast
+1,0,Who are the protagonists in House of the Dead?,Thomas and G,James and Gary, Sonic and Cream,Red and Blue
+1,0,Which is the Sega fighting series?,Virtua Fighter,Street Fighter,Mortal Kombat,Killer Instinct
+1,0,Which series was the first to be put online?,Phantasy Star,Sonic,Gunstar Heroes,Shinobi
+1,0,What was the processing power of the MegaDrive?,16-bit,8-bit,32-bit,64-bit
+1,0,What was the processing power of the Saturn?,32-bit,8-bit,128-bit,64-bit
+1,1,Where did Sega get its name?,Service Games,Super Entertaining Gaming Association,Super Games,Sonic Games
+1,1,What was Sega's original business?,Coin-operated games,Playing cards,Karaoke Boothes,Guns
+1,1,What was Sega's first handheld console called?,GameGear,Gameboy,Lynx,Nomad
+1,1,How does Sonic games run smoothly?,Blast processing,Hyper threading,Overclocking,Turbo mode
+1,2,Which series was left incomplete in 2001 and set for a return?,Shenmue,Jet Set Radio,Panzer Dragoon,Golden Axe
+1,2,Who was the Dwarf in Golden Axe?,Gilius Thunderhead, Ax Battler,Death Adder,Kain Grinder
+1,2,What was Sega's portable MegaDrive called?,Sega Nomad,GameGear,MegaDrive Portable,MegaCarry
+1,2,Which character was introduced in Sonic Advance 2?,Cream the Rabbit,Big the Cat,Amy the Hedgehog,Charmy the Bee
+1,2,When was Sega name created?,1965,1889,1950,1990
+2,0,What was Sony's first console?,Playstation,Playstation 2,Playstation 3, Playstation 4
+2,0,Psygnosis developed which game that would become a Playstation exclusive series?,Wipeout,Wetrix,Radiant Silvergun,Tomb Raider
+2,1,Who was Sony originally going to partner with for a console?,Nintendo,Sega,Philips,SNK
+2,0,Which fighting series is most commonly associated with Sony?,Tekken,Street Fighter,King of Fighters,Primal Rage
+2,0,Which was the first entry of the Final Fantasy series to debut on Playstation?,VII,VIII,VI,IX
+2,1,Which series is a Sony exclusive?,Uncharted,Wipeout,Tomb Raider,Crash Bandicoot
+2,1,What was Sony's controller called on the PS2?,DualShock,DualShock 2,SixAxis,Move
+3,0,Who played Koopa in the SuperMario Bros. Movie?,Dennis Hopper,Bob Hoskins,Arnold Schwarzenegger,Wesley Snipes
+3,0,How many shops in Huddersfield sell N64 games?,1,2,0,3
+3,0,Who is the creator of the Spectrum?,Clive Sinclair,Alan Sugar,Chris Curry,Donald Trump
+3,0,Who was the CodeMasters mascot character?,Dizzy,Bubsy,Cool Spot,Johnny Bazookatone
+3,0,The Amiga home computer was developed by ...?,Commodore,Sinclair Radionics,Amstrad,Philips
+3,0,Which host of The Apprentice owns Amstrad?,Alan Sugar,Donald Trump,Arnold Swarzenegger,Jeremy Clarkson
+3,0,Before Grand Theft Auto what was DMA design's most popular series?,Lemmings,Body Harvest,UniRacers,Space Station Silicon Valley
+3,0,In the hit game Resident Evil who almost becomes a sandwich?,Jill,Barry,Chris,Wesker
+3,1,How many characters are in the original roster of Street Fighter 2?8,6,4,10
+3,1,Psygnosis became which studio in the year 2000?,Sony Studio Liverpool,Retro Studios,Rockstar Games,Team 17
+3,1,Studio Gobo creators of some of Disney's Infinity series are based where?,Brighton,York,London,Gilford
+3,0,Who was the head of Bullfrog games?,Peter Molyneux,Peter North,Peter Pan,Peter Rabbit
+3,2,In which UK city was the studio Ocean based?,Manchester,London,Edinburgh,Cardiff
+3,2,In the film Hackers which of these is not a common password?,1337,God,Sex,Money
+3,1,In which year was the Mortal Kombat film released?,1995,1999,1990,2018
+3,1,How many films are in the Resident Evil film series?,6,4,8,Too many!
+3,1,Which famous director directed House of the Dead?,Uwe Bol, Steven Spielberg,Wes Anderson,Woody Allen
+3,2,What is the Rotten Tomatoes score for House of the Dead?,3%,16%,90%,7%

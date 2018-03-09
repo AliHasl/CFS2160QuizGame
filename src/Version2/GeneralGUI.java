@@ -454,6 +454,19 @@ public class GeneralGUI {
 
         });
 
+
+        askTheAudienceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                PopUpAudience audience = new PopUpAudience();
+                audience.pack();
+                //audience.setSize(250,125);
+                audience.setVisible(true);
+            }
+        });
+
+
         /**
          * Methods for resultsPanel
          */

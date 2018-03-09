@@ -1,10 +1,6 @@
-package Version2;
-
-import Version1.GameController;
+package Version1;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainMenu {
 
@@ -41,24 +37,6 @@ public class MainMenu {
     }
 
 
-    public MainMenu() {
-            startGameButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
 
-                    gameFrame.setContentPane(new GameSetupGUI().getPanel1());
-                    gameFrame.pack();
-
-                }
-            });
-            quitButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-
-
-                }
-            });
-        }
 
 }
