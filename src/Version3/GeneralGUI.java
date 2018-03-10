@@ -103,10 +103,10 @@ public class GeneralGUI {
 
         ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
 
-        this.option1.setText(options.get(0));
-        this.option2.setText(options.get(1));
-        this.option3.setText(options.get(2));
-        this.option4.setText(options.get(3));
+        option1.setText(options.get(0));
+        option2.setText(options.get(1));
+        option3.setText(options.get(2));
+        option4.setText(options.get(3));
 
     }
 

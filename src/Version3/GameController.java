@@ -90,7 +90,7 @@ public class GameController extends DefaultListModel<Player> {
     }
 
     public ArrayList<String> shuffleOptions(String[] currentQuestion) {
-
+        options.clear();
         options.add(currentQuestion[3]);
         options.add(currentQuestion[4]);
         options.add(currentQuestion[5]);

@@ -83,21 +83,21 @@ public class PopUpAudience extends JDialog {
         correctPercent = new int[] {70,50,40};
         wrongPercent = new int[]{30,50,60};
 
+        System.out.println(answer);
 
-
-        if(option1label.equals(answer)){
+        if(option1label.getText().equals(answer)){
             option1Bar.setValue(correctPercent[difficulty]);
             option2Bar.setValue(wrongPercent[difficulty]/3);
             option3Bar.setValue(wrongPercent[difficulty]/3);
             option4Bar.setValue(wrongPercent[difficulty]/3);
         }
-        else if(option2Label.equals(answer)) {
+        else if(option2Label.getText().equals(answer)) {
             option1Bar.setValue(wrongPercent[difficulty]/3);
             option2Bar.setValue(correctPercent[difficulty]);
             option3Bar.setValue(wrongPercent[difficulty] / 3);
             option4Bar.setValue(wrongPercent[difficulty] / 3);
         }
-        else if(option3Label.equals(answer)) {
+        else if(option3Label.getText().equals(answer)) {
             option1Bar.setValue(wrongPercent[difficulty]/3);
             option2Bar.setValue(wrongPercent[difficulty] / 3);
             option3Bar.setValue(correctPercent[difficulty]);

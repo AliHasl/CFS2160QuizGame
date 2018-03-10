@@ -7,7 +7,7 @@ package Version3;
 
 public class Demo {
 
-    private static GameController gameController;
+    //private static GameController gameController;
     //private MainMenu main;
 
 
