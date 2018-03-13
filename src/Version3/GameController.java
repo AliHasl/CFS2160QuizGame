@@ -21,9 +21,6 @@ public class GameController extends DefaultListModel<Player> {
     private DefaultListModel<String> moneyValues;
 
 
-
-
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -50,7 +47,7 @@ public class GameController extends DefaultListModel<Player> {
     }
 
 
-    public void resetGameController(){
+    public void resetGameController() {
         players.clear();
         difficulty = 0;
         playersKicked = 0;
@@ -81,8 +78,8 @@ public class GameController extends DefaultListModel<Player> {
         difficulty = 0;
         playersKicked = 0;
         moneyValues = new DefaultListModel<>();
-        String[] money = {"£1 Zillion","£500,000","£250,000","£125,000","£64,000","£32,000","£16,000","£8,000","£4,000","£2,000","£1,000","£500","£300","£200","£100"};
-        for(int i = 0; i < money.length;i++) {
+        String[] money = {"£1 Zillion", "£500,000", "£250,000", "£125,000", "£64,000", "£32,000", "£16,000", "£8,000", "£4,000", "£2,000", "£1,000", "£500", "£300", "£200", "£100"};
+        for (int i = 0; i < money.length; i++) {
             moneyValues.addElement(money[i]);
         }
     }
@@ -98,10 +95,11 @@ public class GameController extends DefaultListModel<Player> {
         return players;
     }
 
-    public Player quizStart(){
+    public Player quizStart() {
         currentPlayer = players.firstElement();
         return currentPlayer;
     }
+
     public void addToTeam(Player player) {
 
         this.players.addElement(player);
@@ -116,6 +114,7 @@ public class GameController extends DefaultListModel<Player> {
         difficulty = 0;
         playersKicked = 0;
         endGame = false;
+        playerIndex = 0;
         for (int i = 0; i < players.size(); i++) {
             this.players.getElementAt(i).setScore(0);
 
@@ -147,7 +146,29 @@ public class GameController extends DefaultListModel<Player> {
 
     }
 
-    public void endTurn(){
+    public void endTurn() {
+        if (playersKicked == players.size()) {
+            endGame = true;
+        } else if (currentPlayer.equals((players.lastElement()))) {
+            playerIndex = 0;
+
+
+        } else {
+            playerIndex++;
+        }
+        while (players.elementAt(playerIndex).isPlayerOut() && !players.elementAt(playerIndex).equals(players.lastElement())) {
+            playerIndex++;
+
+        }
+        if (currentPlayer.equals((players.lastElement()))) {
+            playerIndex = 0;
+        }
+        currentPlayer = players.elementAt(playerIndex);
+
+
+    }
+
+        /*
         if (currentPlayer.equals(players.lastElement())) {
 
             if (currentPlayer.getScore() == 1) {
@@ -170,17 +191,29 @@ public class GameController extends DefaultListModel<Player> {
 
 
             else {
-                currentPlayer = players.firstElement();
-                playerIndex = 0;
-
+                if(players.firstElement().isPlayerOut()){
+                    playerIndex = 1;
+                    endTurn();
+                }
+                else {
+                    currentPlayer = players.firstElement();
+                    playerIndex = 0;
+                }
             }
 
         } else {
-            currentPlayer = players.elementAt(playerIndex + 1);
-            playerIndex++;
+            if(players.elementAt(playerIndex + 1).isPlayerOut()) {
+                playerIndex++;
+                endTurn();
+            }
+            else {
+                currentPlayer = players.elementAt(playerIndex + 1);
 
+                playerIndex++;
+            }
         }
-    }
+        */
+
 
     public void kickPlayer(){
         playersKicked ++;
