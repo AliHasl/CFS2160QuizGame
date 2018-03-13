@@ -4,8 +4,19 @@ public class Player implements Comparable<Player>{
 
     private String name;
     private int score;
-    private boolean gameOver;
-    private int difficulty;
+    private boolean playerOut;
+    private boolean fiftyFifty;
+    private boolean askAudience;
+
+    public boolean isAskAudience() {
+        return askAudience;
+    }
+
+    public void setAskAudience(boolean askAudience) {
+        this.askAudience = askAudience;
+    }
+
+
 
     public boolean isFiftyFifty() {
         return fiftyFifty;
@@ -13,17 +24,6 @@ public class Player implements Comparable<Player>{
 
     public void setFiftyFifty(boolean fiftyFifty) {
         this.fiftyFifty = fiftyFifty;
-    }
-
-    private boolean fiftyFifty;
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-
-    public int getDifficulty() {
-        return difficulty;
     }
 
     public String resultString(){
@@ -36,15 +36,15 @@ public class Player implements Comparable<Player>{
         return name;
     }
 
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
+    public void setPlayerOut(boolean playerOut) {
+        this.playerOut = playerOut;
     }
 
     public Player(String name) {
         this.name = name;
         this.score = 0;
-        this.difficulty = 0;
-        this.gameOver = false;
+        this.askAudience = true;
+        this.playerOut = false;
         this.fiftyFifty = true;
     }
 

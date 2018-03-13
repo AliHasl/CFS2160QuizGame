@@ -3,14 +3,39 @@ package Version3;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class GameController extends DefaultListModel<Player> {
 
-    private Player player;
+
     private DefaultListModel<Player> players;
     private QuestionDatabase questionDatabase;
     private String[] currentQuestionOptions;
+    private int difficulty;
+    private int playersKicked;
 
+    public DefaultListModel<String> getMoneyValues() {
+        return moneyValues;
+    }
+
+    private DefaultListModel<String> moneyValues;
+
+
+
+
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    private Player currentPlayer;
+
+    public void setPlayerIndex(int playerIndex) {
+        this.playerIndex = playerIndex;
+    }
+
+    private int playerIndex;
+    private boolean endGame;
 
 
     private String[] currentQuestion;
@@ -22,6 +47,14 @@ public class GameController extends DefaultListModel<Player> {
 
     public void setCurrentQuestionOptions(String[] currentQuestionOptions) {
         this.currentQuestionOptions = currentQuestionOptions;
+    }
+
+
+    public void resetGameController(){
+        players.clear();
+        difficulty = 0;
+        playersKicked = 0;
+        endGame = false;
     }
 
     public String[] getCurrentQuestion() {
@@ -44,6 +77,14 @@ public class GameController extends DefaultListModel<Player> {
         Player bob = new Player("bob");
         players.addElement(bob);
         options = new ArrayList<>();
+        playerIndex = 0;
+        difficulty = 0;
+        playersKicked = 0;
+        moneyValues = new DefaultListModel<>();
+        String[] money = {"£1 Zillion","£500,000","£250,000","£125,000","£64,000","£32,000","£16,000","£8,000","£4,000","£2,000","£1,000","£500","£300","£200","£100"};
+        for(int i = 0; i < money.length;i++) {
+            moneyValues.addElement(money[i]);
+        }
     }
 
     public boolean checkAnswer(String guess) {
@@ -57,7 +98,10 @@ public class GameController extends DefaultListModel<Player> {
         return players;
     }
 
-
+    public Player quizStart(){
+        currentPlayer = players.firstElement();
+        return currentPlayer;
+    }
     public void addToTeam(Player player) {
 
         this.players.addElement(player);
@@ -69,23 +113,26 @@ public class GameController extends DefaultListModel<Player> {
     }
 
     public void resetScores() {
+        difficulty = 0;
+        playersKicked = 0;
+        endGame = false;
         for (int i = 0; i < players.size(); i++) {
             this.players.getElementAt(i).setScore(0);
-            this.players.getElementAt(i).setDifficulty(0);
+
         }
     }
 
     public void sortResults() {
         ArrayList<Player> list = new ArrayList<>();
 
-        for (int i = 0; i < this.players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             list.add(players.getElementAt(i));
-            this.players.remove(i);
+            players.remove(i);
         }
 
         Collections.sort(list);
         for (Player player : list) {
-            this.players.addElement(player);
+            players.addElement(player);
         }
     }
 
@@ -100,10 +147,62 @@ public class GameController extends DefaultListModel<Player> {
 
     }
 
+    public void endTurn(){
+        if (currentPlayer.equals(players.lastElement())) {
 
-    public String[] getQuestion(Player player, int category) {
+            if (currentPlayer.getScore() == 1) {
 
-        currentQuestion = questionDatabase.getQuestionFromCategory(category, player.getDifficulty());
+                difficulty ++;
+
+            }
+
+            if (currentPlayer.getScore() == 2) {
+
+                difficulty ++;
+
+            }
+
+            if (currentPlayer.getScore() == 3) {
+
+                endGame = true;
+
+            }
+
+
+            else {
+                currentPlayer = players.firstElement();
+                playerIndex = 0;
+
+            }
+
+        } else {
+            currentPlayer = players.elementAt(playerIndex + 1);
+            playerIndex++;
+
+        }
+    }
+
+    public void kickPlayer(){
+        playersKicked ++;
+    }
+
+    public boolean checkEndOfGame(){
+        if(playersKicked == players.size())
+        {
+            endGame = true;
+        }
+
+        if(endGame == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public String[] getQuestion( int category) {
+
+        currentQuestion = questionDatabase.getQuestionFromCategory(category, difficulty);
         return currentQuestion;
     }
 

@@ -45,21 +45,17 @@ public class GeneralGUI {
     private JList resultsList;
     private JButton half50Button;
     private JButton askTheAudienceButton;
+    private JPanel moneyPanel;
+    private JList moneyProgress;
+    private JProgressBar moneyBar;
+
+    private JFrame thisFrame;
 
 
-    public static JFrame getThisFrame() {
-        return thisFrame;
-    }
-
-    private static JFrame thisFrame;
-
-    public GameController getGameController() {
-        return gameController;
-    }
 
     private GameController gameController;
     private Player currentPlayer;
-    private int playerIndex;
+
 
 
     private String[] currentQuestion;
@@ -83,6 +79,7 @@ public class GeneralGUI {
 
         thisFrame.setContentPane(mainMenu);
         thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         thisFrame.pack();
         thisFrame.setVisible(true);
     }
@@ -97,7 +94,7 @@ public class GeneralGUI {
     }
 
     public void formatQuestion(int category) {
-        currentQuestion = gameController.getQuestion(currentPlayer, category);
+        currentQuestion = gameController.getQuestion(category);
         this.questionField.setText(currentQuestion[2]);
 
 
@@ -136,11 +133,10 @@ public class GeneralGUI {
      */
 
     public GeneralGUI() {
-        // thisFrame = new JFrame("GeneralGUI");
-        //playerList = new JList();
+
         gameController = new GameController();
-        //QuestionDatabase questionDatabase = new QuestionDatabase();
         playerList.setModel(gameController.getPlayers());
+        moneyProgress.setModel(gameController.getMoneyValues());
 
         /**
          * Methods for the MainMenu panel
@@ -152,9 +148,8 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
 
                 thisFrame.setContentPane(gameSetup);
-
                 thisFrame.pack();
-                //thisFrame.setVisible(true);
+
 
             }
         });
@@ -168,7 +163,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(mainMenu);
                 thisFrame.pack();
-                //thisFrame.setVisible(true);
+
             }
         });
 
@@ -176,9 +171,15 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                Player player = new Player(nameField.getText());
-                gameController.addToTeam(player);
+                if(nameField.getText().equals("")){
 
+                    JOptionPane.showMessageDialog(thisFrame, "Please enter a name.");
+                }
+                else {
+                    Player player = new Player(nameField.getText());
+                    nameField.setText(null);
+                    gameController.addToTeam(player);
+                }
 
             }
         });
@@ -203,13 +204,14 @@ public class GeneralGUI {
                 if (gameController.getPlayers().size() == 0) {
                     JOptionPane.showMessageDialog(thisFrame, "You must create at least one player to proceed.");
                 } else {
-                    currentPlayer = gameController.getPlayers().firstElement();
-                    playerIndex = 0;
-                    //JLabel playerTurn = new JLabel("Player " + currentPlayer.getName() + "'s turn.");
+                    currentPlayer = gameController.quizStart();
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
+                    //moneyProgress.setModel(gameController.getPlayers());
+                    //moneyBar.setMaximum(15);
+                    //moneyBar.setValue(currentPlayer.getScore());
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
-                    //thisFrame.setVisible(true);
+
                 }
             }
         });
@@ -225,7 +227,7 @@ public class GeneralGUI {
                 formatQuestion(0);
                 setHalf50Button(currentPlayer);
                 thisFrame.pack();
-                //thisFrame.setVisible(true);
+
 
             }
         });
@@ -237,7 +239,7 @@ public class GeneralGUI {
                 formatQuestion(1);
                 setHalf50Button(currentPlayer);
                 thisFrame.pack();
-                //thisFrame.setVisible(true);
+
             }
         });
         sonyButton.addActionListener(new ActionListener() {
@@ -247,7 +249,7 @@ public class GeneralGUI {
                 formatQuestion(2);
                 setHalf50Button(currentPlayer);
                 thisFrame.pack();
-                //thisFrame.setVisible(true);
+
             }
         });
 
@@ -259,7 +261,7 @@ public class GeneralGUI {
                 setHalf50Button(currentPlayer);
                 thisFrame.pack();
 
-                //thisFrame.setVisible(true);
+
             }
         });
 
@@ -270,7 +272,7 @@ public class GeneralGUI {
         option1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //gameController.setGuess(option1.getText());
+
                 questionAnswered();
                 if (gameController.checkAnswer(option1.getText())) {
                     option1.setBackground(Color.GREEN);
@@ -281,7 +283,8 @@ public class GeneralGUI {
                 } else {
                     System.out.println("wong");
                     option1.setBackground(Color.RED);
-                    currentPlayer.setGameOver(true);
+                    currentPlayer.setPlayerOut(true);
+                    gameController.kickPlayer();
                 }
 
             }
@@ -289,7 +292,7 @@ public class GeneralGUI {
         option2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //gameController.setGuess(option2.getText());
+
                 questionAnswered();
                 if (gameController.checkAnswer(option2.getText())) {
                     System.out.println("correct");
@@ -299,14 +302,15 @@ public class GeneralGUI {
                 } else {
                     System.out.println("wong");
                     option2.setBackground(Color.RED);
-                    currentPlayer.setGameOver(true);
+                    currentPlayer.setPlayerOut(true);
+                    gameController.kickPlayer();
                 }
             }
         });
         option3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //gameController.setGuess(option3.getText());
+
                 questionAnswered();
                 if (gameController.checkAnswer(option3.getText())) {
                     System.out.println("correct");
@@ -316,14 +320,15 @@ public class GeneralGUI {
                 } else {
                     System.out.println("wong");
                     option3.setBackground(Color.RED);
-                    currentPlayer.setGameOver(true);
+                    currentPlayer.setPlayerOut(true);
+                    gameController.kickPlayer();
                 }
             }
         });
         option4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                // gameController.setGuess(option4.getText());
+
                 questionAnswered();
                 if (gameController.checkAnswer(option4.getText())) {
                     System.out.println("correct");
@@ -334,7 +339,8 @@ public class GeneralGUI {
                 } else {
                     System.out.println("wong");
                     option4.setBackground(Color.RED);
-                    currentPlayer.setGameOver(true);
+                    currentPlayer.setPlayerOut(true);
+                    gameController.kickPlayer();
 
                 }
             }
@@ -344,31 +350,22 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 resetQuestionPanel();
-                if (currentPlayer.equals(gameController.getPlayers().lastElement())) {
-                    if (currentPlayer.getScore() == 2) {
-                        thisFrame.setContentPane(resultsPanel);
-                        gameController.sortResults();
-                        resultsList.setModel(gameController.getPlayers());
-                        thisFrame.pack();
-                        //TODO WIN SCREEN
-                    } else {
-                        currentPlayer = gameController.getPlayers().firstElement();
-                        playerIndex = 0;
+                gameController.endTurn();
+                if(gameController.checkEndOfGame()) {
+                    thisFrame.setContentPane(resultsPanel);
+                    gameController.sortResults();
+                    resultsList.setModel(gameController.getPlayers());
+                    thisFrame.pack();
+                }
 
-                        categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
-                        thisFrame.setContentPane(categorySelect);
-                        thisFrame.pack();
-                        //thisFrame.setVisible(true);
-                    }
-
-                } else {
-                    currentPlayer = gameController.getPlayers().elementAt(playerIndex + 1);
-                    playerIndex++;
+                else{
+                    currentPlayer = gameController.getCurrentPlayer();
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
+                    moneyProgress.setSelectedIndex(gameController.getMoneyValues().size() - currentPlayer.getScore());
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
-                    //thisFrame.setVisible(true);
                 }
+
             }
         });
 
@@ -382,17 +379,17 @@ public class GeneralGUI {
                 while (cycles < 2) {
                     System.out.println(random);
                     if (random == 1) {
-                        if (option1.isEnabled()) {                               //is it enabled
-                            if (gameController.checkAnswer(option1.getText())) { //Is it the correct answer
-                                random = rn.nextInt(4) + 1;               //if so new random int
+                        if (option1.isEnabled()) {
+                            if (gameController.checkAnswer(option1.getText())) {
+                                random = rn.nextInt(4) + 1;
                             } else {
-                                option1.setEnabled(false);                       //If not the answer, disable button
-                                random = rn.nextInt(4) + 1;              //New random number
-                                cycles++;                                       //increase cycle count
+                                option1.setEnabled(false);
+                                random = rn.nextInt(4) + 1;
+                                cycles++;
                             }
 
                         } else {
-                            random = rn.nextInt(4) + 1;                 //if disabled get new random number
+                            random = rn.nextInt(4) + 1;
                         }
                     } else if (random == 2) {
                         if (option2.isEnabled()) {
@@ -447,7 +444,6 @@ public class GeneralGUI {
 
                 PopUpAudience audience = new PopUpAudience(gameController);
                 audience.pack();
-                //audience.setSize(250,125);
                 audience.setVisible(true);
             }
         });
@@ -461,15 +457,24 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent e) {
                 gameController.resetScores();
                 currentPlayer = gameController.getPlayers().firstElement();
-                playerIndex = 0;
-                //JLabel playerTurn = new JLabel("Player " + currentPlayer.getName() + "'s turn.");
+                gameController.setPlayerIndex(0);
+
                 categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                 thisFrame.setContentPane(categorySelect);
                 thisFrame.pack();
+
 
             }
         });
 
 
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                gameController.resetGameController();
+                thisFrame.setContentPane(mainMenu);
+                thisFrame.pack();
+            }
+        });
     }
 }
