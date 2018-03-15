@@ -1,9 +1,8 @@
-package Version3;
+package Version4;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class GameController extends DefaultListModel<Player> {
 
@@ -154,15 +153,7 @@ public class GameController extends DefaultListModel<Player> {
         if (playersKicked == players.size()) {
             endGame = true;
             return null;
-/*
-        } else if (currentPlayer.equals((players.lastElement()))) {
-            playerIndex = 0;
 
-
-        } else {
-            playerIndex++;
-        }
-*/
         }
         else{
             playerIndex ++;
@@ -174,63 +165,13 @@ public class GameController extends DefaultListModel<Player> {
             playerIndex = playerIndex % players.size();
 
         }
-        /*
-        if (currentPlayer.equals((players.lastElement()))) {
-            currentPlayer = endTurn();
-            return currentPlayer;
-        }
-        */
+
         currentPlayer = players.elementAt(playerIndex);
         return currentPlayer;
 
 
     }
 
-        /*
-        if (currentPlayer.equals(players.lastElement())) {
-
-            if (currentPlayer.getScore() == 1) {
-
-                difficulty ++;
-
-            }
-
-            if (currentPlayer.getScore() == 2) {
-
-                difficulty ++;
-
-            }
-
-            if (currentPlayer.getScore() == 3) {
-
-                endGame = true;
-
-            }
-
-
-            else {
-                if(players.firstElement().isPlayerOut()){
-                    playerIndex = 1;
-                    endTurn();
-                }
-                else {
-                    currentPlayer = players.firstElement();
-                    playerIndex = 0;
-                }
-            }
-
-        } else {
-            if(players.elementAt(playerIndex + 1).isPlayerOut()) {
-                playerIndex++;
-                endTurn();
-            }
-            else {
-                currentPlayer = players.elementAt(playerIndex + 1);
-
-                playerIndex++;
-            }
-        }
-        */
 
 
     public void kickPlayer(){

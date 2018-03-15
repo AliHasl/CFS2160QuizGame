@@ -1,4 +1,6 @@
-package Version3;
+package Version4;
+
+
 
 
 import javax.imageio.ImageIO;
@@ -84,12 +86,19 @@ public class GeneralGUI {
         thisFrame.setVisible(true);
     }
 
-    private void setHalf50Button(Player player) {
+    private void setLifelineButtons(Player player) {
         if (player.isFiftyFifty()) {
             half50Button.setEnabled(true);
         } else {
             half50Button.setEnabled(false);
         }
+        if (player.isAskAudience()){
+            askTheAudienceButton.setEnabled(true);
+        }
+        else{
+            askTheAudienceButton.setEnabled(false);
+        }
+
 
     }
 
@@ -205,10 +214,9 @@ public class GeneralGUI {
                     JOptionPane.showMessageDialog(thisFrame, "You must create at least one player to proceed.");
                 } else {
                     currentPlayer = gameController.quizStart();
+                    moneyProgress.setEnabled(false);
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
-                    //moneyProgress.setModel(gameController.getPlayers());
-                    //moneyBar.setMaximum(15);
-                    //moneyBar.setValue(currentPlayer.getScore());
+                    moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
 
@@ -225,7 +233,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(0);
-                setHalf50Button(currentPlayer);
+                setLifelineButtons(currentPlayer);
                 thisFrame.pack();
 
 
@@ -237,7 +245,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(1);
-                setHalf50Button(currentPlayer);
+                setLifelineButtons(currentPlayer);
                 thisFrame.pack();
 
             }
@@ -247,7 +255,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(2);
-                setHalf50Button(currentPlayer);
+                setLifelineButtons(currentPlayer);
                 thisFrame.pack();
 
             }
@@ -258,7 +266,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(questionDisplay);
                 formatQuestion(3);
-                setHalf50Button(currentPlayer);
+                setLifelineButtons(currentPlayer);
                 thisFrame.pack();
 
 
@@ -350,7 +358,7 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 resetQuestionPanel();
-                gameController.endTurn();
+                currentPlayer = gameController.endTurn();
                 if(gameController.checkEndOfGame()) {
                     thisFrame.setContentPane(resultsPanel);
                     gameController.sortResults();
@@ -359,9 +367,9 @@ public class GeneralGUI {
                 }
 
                 else{
-                    currentPlayer = gameController.getCurrentPlayer();
+
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
-                    moneyProgress.setSelectedIndex(gameController.getMoneyValues().size() - currentPlayer.getScore());
+                    moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
                 }
@@ -445,6 +453,8 @@ public class GeneralGUI {
                 PopUpAudience audience = new PopUpAudience(gameController);
                 audience.pack();
                 audience.setVisible(true);
+                askTheAudienceButton.setEnabled(false);
+                currentPlayer.setAskAudience(false);
             }
         });
 
@@ -457,8 +467,7 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent e) {
                 gameController.resetScores();
                 currentPlayer = gameController.getPlayers().firstElement();
-                gameController.setPlayerIndex(0);
-
+                moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                 categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                 thisFrame.setContentPane(categorySelect);
                 thisFrame.pack();
