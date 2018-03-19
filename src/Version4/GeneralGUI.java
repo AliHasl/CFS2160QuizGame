@@ -3,6 +3,8 @@ package Version4;
 
 
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -50,9 +53,12 @@ public class GeneralGUI {
     private JPanel moneyPanel;
     private JList moneyProgress;
     private JPanel mainMenuButtons;
+    private JPanel busterFaceCat;
+    private JPanel catTopPanel;
     private JProgressBar moneyBar;
 
     private JFrame thisFrame;
+    private Font teletext;
 
 
 
@@ -68,22 +74,62 @@ public class GeneralGUI {
      */
 
     public void display() {
-
         thisFrame = new JFrame();
 
-        int width = 640;
-        int height = 512;
-        Dimension screenSize = new Dimension(width, height);
+        try {
+            File tele = new File("res/teletext_regular.ttf");
+
+            teletext = Font.createFont(Font.TRUETYPE_FONT, tele);
+
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find stupid file");
+
+        }catch(FontFormatException ex){
+            System.out.println("Error with Font");
+
+        }
+        catch (IOException ex) {
+            System.out.println("error reading file");
+        }
+
+
+        System.out.println(teletext);
+
+        GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        genv.registerFont(teletext);
+        teletext = teletext.deriveFont(30F);
+
+        JButton[] buttons = new JButton[]{startButton, backButton, startGameButton,addButton,removeButton,nintendoButton,
+        segaButton,sonyButton,generalKnowledgeButton,option1,option2, option3, option4, half50Button,askTheAudienceButton,
+        anotherGameButton,mainMenuButton, continueButton};
+
+        for (JButton jbut: buttons){
+            jbut.setFont(teletext);
+        }
+
+        JLabel[] jLabels = new JLabel[]{categorySelectTitle, questionField};
+        for (JLabel jlb: jLabels){
+            jlb.setFont(teletext);
+        }
+
+        JList[] jLists = new JList[]{moneyProgress,playerList,resultsList};
+        for(JList jLt: jLists){
+            jLt.setFont(teletext);
+        }
+
         thisFrame.setSize(mainMenu.getPreferredSize());
-        thisFrame.setMinimumSize(mainMenu.getMinimumSize());
-        //mainMenu.setPreferredSize(screenSize);
-        System.out.println(mainMenu.getPreferredSize().getHeight());
-        titleImagePanel.setSize(mainMenu.getMinimumSize());
+        thisFrame.setMinimumSize(categorySelect.getMinimumSize());
+        thisFrame.setBackground(Color.BLACK);
+
+        thisFrame.setContentPane(mainMenu);
+        thisFrame.pack();
+
+        //titleImagePanel.setSize(titleImagePanel.getMinimumSize());
         try {
             BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
             Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
             JLabel titleImageLabel = new JLabel(new ImageIcon(stretchedImage));
-
 
             titleImagePanel.add(titleImageLabel);
         } catch (FileNotFoundException ex) {
@@ -95,7 +141,7 @@ public class GeneralGUI {
 
         thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        thisFrame.pack();
+        //thisFrame.pack();
         thisFrame.setVisible(true);
     }
 
@@ -228,9 +274,29 @@ public class GeneralGUI {
                 } else {
                     currentPlayer = gameController.quizStart();
                     moneyProgress.setEnabled(false);
+
+                    categorySelectTitle.setForeground(Color.BLUE);
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                     moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
+                    try {
+                        BufferedImage brianImage = ImageIO.read(new File("res/BamboozleFace.jpg"));
+                        Image stretchedImage = brianImage.getScaledInstance(busterFaceCat.getWidth(), busterFaceCat.getHeight(), Image.SCALE_DEFAULT);
+                        JLabel busterFaceLabel = new JLabel(new ImageIcon(stretchedImage));
+
+                        busterFaceCat.add(busterFaceLabel);
+
+                        BufferedImage topImage = ImageIO.read(new File("res/BamboozleTop.jpg"));
+                        Image elongatedImage = topImage.getScaledInstance(catTopPanel.getWidth(), catTopPanel.getHeight(), Image.SCALE_DEFAULT);
+                        JLabel catTopImageLabel = new JLabel(new ImageIcon(elongatedImage));
+
+                        catTopPanel.add(catTopImageLabel);
+
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("Unable to find stupid file");
+                    } catch (IOException ex) {
+                        System.out.println("error reading file");
+                    }
                     thisFrame.pack();
 
                 }
@@ -240,6 +306,7 @@ public class GeneralGUI {
         /**
          * Methods for categorySelect panel
          */
+
 
         nintendoButton.addActionListener(new ActionListener() {
             @Override
@@ -498,5 +565,6 @@ public class GeneralGUI {
                 thisFrame.pack();
             }
         });
+
     }
 }

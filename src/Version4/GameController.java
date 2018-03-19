@@ -77,7 +77,7 @@ public class GameController extends DefaultListModel<Player> {
         difficulty = 0;
         playersKicked = 0;
         moneyValues = new DefaultListModel<>();
-        String[] money = {"£1 Zillion", "£500,000", "£250,000", "£125,000", "£64,000", "£32,000", "£16,000", "£8,000", "£4,000", "£2,000", "£1,000", "£500", "£300", "£200", "£100"};
+        String[] money = {"$1 Zillion", "$500,000", "$250,000", "$125,000", "$64,000", "$32,000", "$16,000", "$8,000", "$4,000", "$2,000", "$1,000", "$500", "$300", "$200", "$100"};
         for (int i = 0; i < money.length; i++) {
             moneyValues.addElement(money[i]);
         }
