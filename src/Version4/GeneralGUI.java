@@ -49,6 +49,7 @@ public class GeneralGUI {
     private JButton askTheAudienceButton;
     private JPanel moneyPanel;
     private JList moneyProgress;
+    private JPanel mainMenuButtons;
     private JProgressBar moneyBar;
 
     private JFrame thisFrame;
@@ -69,17 +70,29 @@ public class GeneralGUI {
     public void display() {
 
         thisFrame = new JFrame();
+
+        int width = 640;
+        int height = 512;
+        Dimension screenSize = new Dimension(width, height);
+        thisFrame.setSize(mainMenu.getPreferredSize());
+        thisFrame.setMinimumSize(mainMenu.getMinimumSize());
+        //mainMenu.setPreferredSize(screenSize);
+        System.out.println(mainMenu.getPreferredSize().getHeight());
+        titleImagePanel.setSize(mainMenu.getMinimumSize());
         try {
             BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
-            JLabel titleImageLabel = new JLabel(new ImageIcon(titleImage));
+            Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
+            JLabel titleImageLabel = new JLabel(new ImageIcon(stretchedImage));
+
+
             titleImagePanel.add(titleImageLabel);
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to find stupid file");
         } catch (IOException ex) {
             System.out.println("error reading file");
         }
-
         thisFrame.setContentPane(mainMenu);
+
         thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         thisFrame.pack();
