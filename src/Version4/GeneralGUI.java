@@ -104,7 +104,7 @@ public class GeneralGUI {
     }
 
     private void setLifelineButtons(Player player) {
-        if (player.isFiftyFifty()) {
+        if (player.isHalfFifty()) {
             half50Button.setEnabled(true);
         } else {
             half50Button.setEnabled(false);
@@ -471,7 +471,7 @@ public class GeneralGUI {
                     }
 
                 }
-                currentPlayer.setFiftyFifty(false);
+                currentPlayer.setHalfFifty(false);
                 half50Button.setEnabled(false);
             }
 

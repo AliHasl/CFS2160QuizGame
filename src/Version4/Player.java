@@ -24,11 +24,11 @@ public class Player implements Comparable<Player>{
         this.askAudience = askAudience;
     }
 
-    public boolean isFiftyFifty() {
+    public boolean isHalfFifty() {
         return fiftyFifty;
     }
 
-    public void setFiftyFifty(boolean fiftyFifty) {
+    public void setHalfFifty(boolean fiftyFifty) {
         this.fiftyFifty = fiftyFifty;
     }
 

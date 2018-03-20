@@ -110,7 +110,7 @@ public class GameController extends DefaultListModel<Player> {
         for (int i = 0; i < players.size(); i++) {
             this.players.getElementAt(i).setScore(0);
             this.players.getElementAt(i).setPlayerOut(false);
-            this.players.getElementAt(i).setFiftyFifty(true);
+            this.players.getElementAt(i).setHalfFifty(true);
             this.players.getElementAt(i).setAskAudience(true);
 
         }
