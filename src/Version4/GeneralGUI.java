@@ -1,10 +1,5 @@
 package Version4;
 
-
-
-
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static java.awt.Color.WHITE;
-import static java.awt.Color.getColor;
 
 public class GeneralGUI {
     private JPanel GeneralGUI;
@@ -45,34 +37,20 @@ public class GeneralGUI {
     private JButton option4;
     private JLabel questionField;
     private JButton continueButton;
-
     private JPanel titleImagePanel;
     private JPanel resultsPanel;
     private JButton anotherGameButton;
     private JButton mainMenuButton;
-    private JList resultsList;
     private JButton half50Button;
     private JButton askTheAudienceButton;
-    private JPanel moneyPanel;
     private JList moneyProgress;
-    private JPanel mainMenuButtons;
     private JPanel busterFaceCat;
     private JPanel catTopPanel;
     private JPanel resultDisplay;
     private JLabel resultsTitle;
-    private JPanel resultsTop;
-    private JProgressBar moneyBar;
-
     private JFrame thisFrame;
-    private Font teletext;
-
-
-
     private GameController gameController;
     private Player currentPlayer;
-
-
-
     private String[] currentQuestion;
 
     /**
@@ -82,8 +60,7 @@ public class GeneralGUI {
     public void display() {
         thisFrame = new JFrame("Bamboozle!");
 
-
-
+        //Sorts buttons into arrays to set the imported Font
         JButton[] buttons = new JButton[]{startButton, backButton, startGameButton,addButton,removeButton,nintendoButton,
         segaButton,sonyButton,generalKnowledgeButton,option1,option2, option3, option4, half50Button,askTheAudienceButton,
         anotherGameButton,mainMenuButton, continueButton};
@@ -91,12 +68,12 @@ public class GeneralGUI {
         for (JButton jbut: buttons){
             jbut.setFont(gameController.getTeletext());
         }
-
+        //Sorts JLabels into arrays to set the imported Font
         JLabel[] jLabels = new JLabel[]{categorySelectTitle, questionField,resultsTitle};
         for (JLabel jlb: jLabels){
             jlb.setFont(gameController.getTeletext());
         }
-
+        //Sorts JLists into arrays to set the imported font.
         JList[] jLists = new JList[]{moneyProgress,playerList};
         for(JList jLt: jLists){
             jLt.setFont(gameController.getTeletext());
@@ -105,13 +82,11 @@ public class GeneralGUI {
         thisFrame.setSize(GeneralGUI.getMinimumSize());
         thisFrame.setMinimumSize(mainMenu.getMinimumSize());
         thisFrame.setBackground(Color.BLACK);
-
-
         thisFrame.setContentPane(mainMenu);
-
-
         titleImagePanel.setSize(titleImagePanel.getMinimumSize());
         thisFrame.pack();
+
+        //Imports and formats the title image
         try {
             BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
             Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
@@ -124,10 +99,7 @@ public class GeneralGUI {
             System.out.println("error reading file");
         }
         thisFrame.setContentPane(mainMenu);
-
         thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //thisFrame.pack();
         thisFrame.setVisible(true);
     }
 
@@ -143,22 +115,17 @@ public class GeneralGUI {
         else{
             askTheAudienceButton.setEnabled(false);
         }
-
-
     }
 
+    //Sets the text for JLabels and JButtons to that of the current question
     public void formatQuestion(int category) {
         currentQuestion = gameController.getQuestion(category);
         this.questionField.setText("<html>"+currentQuestion[2]+"</html>");
-
-
         ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
-
         option1.setText(options.get(0));
         option2.setText(options.get(1));
         option3.setText(options.get(2));
         option4.setText(options.get(3));
-
     }
 
     private void resetQuestionPanel() {
@@ -200,11 +167,8 @@ public class GeneralGUI {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
                 thisFrame.setContentPane(gameSetup);
                 thisFrame.pack();
-
-
             }
         });
 
@@ -217,7 +181,6 @@ public class GeneralGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 thisFrame.setContentPane(mainMenu);
                 thisFrame.pack();
-
             }
         });
 
@@ -234,18 +197,15 @@ public class GeneralGUI {
                     nameField.setText(null);
                     gameController.addToTeam(player);
                 }
-
             }
         });
 
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
                 int selectionNumber = playerList.getSelectedIndex();
                 if (selectionNumber == -1) {
                     JOptionPane.showMessageDialog(thisFrame, "Please select a player to remove.");
-
                 } else {
                     gameController.removeFromTeam(selectionNumber);
                 }
@@ -260,23 +220,21 @@ public class GeneralGUI {
                 } else {
                     currentPlayer = gameController.quizStart();
                     moneyProgress.setEnabled(false);
-
                     categorySelectTitle.setForeground(Color.BLUE);
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                     moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
 
+                    //Imports the images for the category select screen
                     try {
                         BufferedImage brianImage = ImageIO.read(new File("res/BamboozleFace.jpg"));
                         Image stretchedImage = brianImage.getScaledInstance(busterFaceCat.getWidth(), busterFaceCat.getHeight(), Image.SCALE_DEFAULT);
                         JLabel busterFaceLabel = new JLabel(new ImageIcon(stretchedImage));
-
                         busterFaceCat.add(busterFaceLabel);
 
                         BufferedImage topImage = ImageIO.read(new File("res/BamboozleTop.jpg"));
                         Image elongatedImage = topImage.getScaledInstance(catTopPanel.getWidth(), catTopPanel.getHeight(), Image.SCALE_DEFAULT);
                         JLabel catTopImageLabel = new JLabel(new ImageIcon(elongatedImage));
-
                         catTopPanel.add(catTopImageLabel);
 
                     } catch (FileNotFoundException ex) {
@@ -285,7 +243,6 @@ public class GeneralGUI {
                         System.out.println("error reading file");
                     }
                     thisFrame.pack();
-
                 }
             }
         });
@@ -351,12 +308,11 @@ public class GeneralGUI {
                 questionAnswered();
                 if (gameController.checkAnswer(option1.getText())) {
                     option1.setBackground(Color.GREEN);
-                    System.out.println("correct");
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
 
                 } else {
-                    System.out.println("wong");
+
                     option1.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToResultsList(currentPlayer);
@@ -371,12 +327,10 @@ public class GeneralGUI {
 
                 questionAnswered();
                 if (gameController.checkAnswer(option2.getText())) {
-                    System.out.println("correct");
                     option2.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
                 } else {
-                    System.out.println("wong");
                     option2.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToResultsList(currentPlayer);
@@ -390,12 +344,10 @@ public class GeneralGUI {
 
                 questionAnswered();
                 if (gameController.checkAnswer(option3.getText())) {
-                    System.out.println("correct");
                     option3.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
 
                 } else {
-                    System.out.println("wong");
                     option3.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToResultsList(currentPlayer);
@@ -403,24 +355,22 @@ public class GeneralGUI {
                 }
             }
         });
+
         option4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
                 questionAnswered();
                 if (gameController.checkAnswer(option4.getText())) {
-                    System.out.println("correct");
                     option4.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
+                }
 
-
-                } else {
-                    System.out.println("wong");
+                else {
                     option4.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToResultsList(currentPlayer);
                     gameController.kickPlayer();
-
                 }
             }
         });
@@ -432,7 +382,6 @@ public class GeneralGUI {
                 currentPlayer = gameController.endTurn();
                 if(gameController.checkEndOfGame()) {
                     thisFrame.setContentPane(resultsPanel);
-                    ArrayList<Player> list = new ArrayList<Player>();
                     gameController.sortResults();
                     resultsTitle.setText("Game Over! How much did you win?");
                     resultDisplay.setLayout(new BoxLayout(resultDisplay,1));
@@ -447,21 +396,16 @@ public class GeneralGUI {
                         temp.setFont(gameController.getTeletext());
                         temp.setForeground(Color.WHITE);
                         resultDisplay.add(temp);
-
-
                     }
-
                     thisFrame.pack();
                 }
 
                 else{
-
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                     moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
                     thisFrame.pack();
                 }
-
             }
         });
 
@@ -533,7 +477,6 @@ public class GeneralGUI {
 
         });
 
-
         askTheAudienceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -564,7 +507,6 @@ public class GeneralGUI {
             }
         });
 
-
         mainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -574,9 +516,5 @@ public class GeneralGUI {
                 thisFrame.pack();
             }
         });
-
-
-
-
     }
 }

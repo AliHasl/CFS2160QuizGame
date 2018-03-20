@@ -10,86 +10,22 @@ import java.util.Collections;
 
 public class GameController extends DefaultListModel<Player> {
 
-
-    private DefaultListModel<Player> players;
-
-    public ArrayList<Player> getPlayerRankings() {
-        return playerRankings;
-    }
-
-    private ArrayList<Player> playerRankings;
     private QuestionDatabase questionDatabase;
-    private String[] currentQuestionOptions;
+    private Font teletext;
+    private DefaultListModel<Player> players;
+    private ArrayList<Player> playerRankings;
+    private DefaultListModel<String> moneyValues;
+    private ArrayList<String> options;
+    private String[] money;
+    private String[] currentQuestion;
+    private Player currentPlayer;
+    private int playerIndex;
     private int difficulty;
     private int playersKicked;
-    private int playersRemaining;
-
-    public Font getTeletext() {
-        return teletext;
-    }
-
-    private Font teletext;
-
-
-    private String[] money;
-    public DefaultListModel<String> getMoneyValues() {
-        return moneyValues;
-    }
-
-    private DefaultListModel<String> moneyValues;
-
-    public String getMoneyValue(int i) {
-        return money[i];
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    private Player currentPlayer;
-
-    public void setPlayerIndex(int playerIndex) {
-        this.playerIndex = playerIndex;
-    }
-
-    private int playerIndex;
     private boolean endGame;
 
-
-    private String[] currentQuestion;
-    private ArrayList<String> options;
-
-    public String[] getCurrentQuestionOptions() {
-        return currentQuestionOptions;
-    }
-
-    public void setCurrentQuestionOptions(String[] currentQuestionOptions) {
-        this.currentQuestionOptions = currentQuestionOptions;
-    }
-
-
-    public void resetGameController() {
-        players.clear();
-        difficulty = 0;
-        playersKicked = 0;
-        endGame = false;
-    }
-
-    public String[] getCurrentQuestion() {
-        return currentQuestion;
-    }
-
-    public ArrayList<String> getOptions() {
-        return options;
-    }
-
-
-    public void setCurrentQuestion(String[] currentQuestion) {
-        this.currentQuestion = currentQuestion;
-    }
-
     public GameController() {
-        players = new DefaultListModel<Player>();
+        players = new DefaultListModel<>();
         questionDatabase = new QuestionDatabase();
         questionDatabase.setAllCategoryQuestions();
         Player bob = new Player("bob");
@@ -106,34 +42,42 @@ public class GameController extends DefaultListModel<Player> {
         moneyValues = new DefaultListModel<>();
         money = new String[]{"$1 Zillion", "$500,000", "$250,000", "$125,000", "$64,000", "$32,000", "$16,000", "$8,000",
                 "$4,000", "$2,000", "$1,000", "$500", "$300", "$200", "$100", "$0"};
+
+
         for (int i = 0; i < money.length; i++) {
             moneyValues.addElement(money[i]);
-
         }
 
         try {
             File tele = new File("res/teletext_regular.ttf");
-
             teletext = Font.createFont(Font.TRUETYPE_FONT, tele);
-
-
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to find stupid file");
-
         }catch(FontFormatException ex){
             System.out.println("Error with Font");
-
         }
         catch (IOException ex) {
             System.out.println("error reading file");
         }
 
-
-        System.out.println(teletext);
-
         GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         genv.registerFont(teletext);
         teletext = teletext.deriveFont(30F);
+    }
+
+    public void resetGameController() {
+        players.clear();
+        difficulty = 0;
+        playersKicked = 0;
+        endGame = false;
+    }
+
+    public String[] getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public ArrayList<String> getOptions() {
+        return options;
     }
 
     public boolean checkAnswer(String guess) {
@@ -141,10 +85,6 @@ public class GameController extends DefaultListModel<Player> {
             return true;
         else
             return false;
-    }
-
-    public DefaultListModel<Player> getPlayers() {
-        return players;
     }
 
     public Player quizStart() {
@@ -183,13 +123,7 @@ public class GameController extends DefaultListModel<Player> {
 
     public void sortResults() {
 
-
-
-
         Collections.sort(playerRankings);
-
-
-
     }
 
     public ArrayList<String> shuffleOptions(String[] currentQuestion) {
@@ -203,21 +137,19 @@ public class GameController extends DefaultListModel<Player> {
 
     }
 
+    ///Checks endGames states and goes through the player list
     public Player endTurn() {
-        playersRemaining = players.size() - playersKicked;
 
         if(currentPlayer.getScore() == 15){
             playerRankings.add(currentPlayer);
-
         }
 
         if (playersKicked == players.size() || playerRankings.size() == players.size()) {
             endGame = true;
             return null;
-
         }
 
-
+        //If no end game conditions are met, get next player
         else{
             playerIndex ++;
             playerIndex = playerIndex % players.size();
@@ -226,11 +158,11 @@ public class GameController extends DefaultListModel<Player> {
         while (players.elementAt(playerIndex).isPlayerOut() ) {
             playerIndex ++;
             playerIndex = playerIndex % players.size();
-
         }
 
         currentPlayer = players.elementAt(playerIndex);
 
+        //Increases the question difficulty after every five levels
         if(currentPlayer.getScore() >= 5 && currentPlayer.getScore() < 10) {
             difficulty = 1;
         }
@@ -239,10 +171,7 @@ public class GameController extends DefaultListModel<Player> {
             difficulty = 2;
         }
         return currentPlayer;
-
-
     }
-
 
 
     public void kickPlayer(){
@@ -254,7 +183,6 @@ public class GameController extends DefaultListModel<Player> {
         {
             endGame = true;
         }
-
         if(endGame == true){
             return true;
         }
@@ -263,11 +191,29 @@ public class GameController extends DefaultListModel<Player> {
         }
     }
 
-    public String[] getQuestion( int category) {
+    //Getters
+    public DefaultListModel<Player> getPlayers() {
+        return players;
+    }
 
+    public String[] getQuestion( int category) {
         currentQuestion = questionDatabase.getQuestionFromCategory(category, difficulty);
         return currentQuestion;
     }
 
+    public Font getTeletext() {
+        return teletext;
+    }
 
+    public ArrayList<Player> getPlayerRankings() {
+        return playerRankings;
+    }
+
+    public DefaultListModel<String> getMoneyValues() {
+        return moneyValues;
+    }
+
+    public String getMoneyValue(int i) {
+        return money[i];
+    }
 }

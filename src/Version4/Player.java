@@ -4,46 +4,9 @@ public class Player implements Comparable<Player>{
 
     private String name;
     private int score;
-
-    public boolean isPlayerOut() {
-        return playerOut;
-    }
-
     private boolean playerOut;
     private boolean fiftyFifty;
     private boolean askAudience;
-
-    public boolean isAskAudience() {
-        return askAudience;
-    }
-
-    public void setAskAudience(boolean askAudience) {
-        this.askAudience = askAudience;
-    }
-
-
-
-    public boolean isFiftyFifty() {
-        return fiftyFifty;
-    }
-
-    public void setFiftyFifty(boolean fiftyFifty) {
-        this.fiftyFifty = fiftyFifty;
-    }
-
-    public String resultString(){
-
-        return  "Player" + name + " " + score;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public void setPlayerOut(boolean playerOut) {
-        this.playerOut = playerOut;
-    }
 
     public Player(String name) {
         this.name = name;
@@ -53,10 +16,33 @@ public class Player implements Comparable<Player>{
         this.fiftyFifty = true;
     }
 
+    public boolean isAskAudience() {
+        return askAudience;
+    }
+
+    public void setAskAudience(boolean askAudience) {
+        this.askAudience = askAudience;
+    }
+
+    public boolean isFiftyFifty() {
+        return fiftyFifty;
+    }
+
+    public void setFiftyFifty(boolean fiftyFifty) {
+        this.fiftyFifty = fiftyFifty;
+    }
+
+    public void setPlayerOut(boolean playerOut) {
+        this.playerOut = playerOut;
+    }
+
+    public boolean isPlayerOut() {
+        return playerOut;
+    }
+
     public String getName() {
         return name;
     }
-
 
     public int getScore() {
         return score;
@@ -66,6 +52,12 @@ public class Player implements Comparable<Player>{
         this.score = score;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
     public int compareTo(Player player){
         if(player.score > this.score) {
             return 1;

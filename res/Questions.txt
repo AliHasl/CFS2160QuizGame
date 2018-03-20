@@ -36,7 +36,7 @@
 2,0,Which fighting series is most commonly associated with Sony?,Tekken,Street Fighter,King of Fighters,Primal Rage
 2,0,Which was the first entry of the Final Fantasy series to debut on Playstation?,VII,VIII,VI,IX
 2,1,Which series is a Sony exclusive?,Uncharted,Wipeout,Tomb Raider,Crash Bandicoot
-2,1,What was Sony's controller called on the PS2?,DualShock,DualShock 2,SixAxis,Move
+2,2,What was Sony's controller called on the PS2?,DualShock 2,DualShock ,SixAxis,Move
 3,0,Who played Koopa in the SuperMario Bros. Movie?,Dennis Hopper,Bob Hoskins,Arnold Schwarzenegger,Wesley Snipes
 3,2,How many shops in Huddersfield sell N64 games?,1,2,0,3
 3,0,Who is the creator of the Spectrum?,Clive Sinclair,Alan Sugar,Chris Curry,Donald Trump
