@@ -8,7 +8,7 @@
 0,1,Project Dolphin was the codename for which system?,GameCube,N64,Gameboy Advance,Super Nintendo
 0,1,How many Pokemons were available in the original Pokemons game?,151,200,75,500
 0,1,How did Nintendo start its' business?,Playing Cards,Video Games,Movies,Comics
-0,1,Where is the Nintendo headquaters?,Kyoto,Tokyo,Osaka,Fukuoka
+0,1,Where is the Nintendo headquarters?,Kyoto,Tokyo,Osaka,Fukuoka
 0,2,When was Nintendo founded?,1889,1970,1953,1935
 0,2,Mario is to Wario as Luigi is to ...?,WaLuigi,Wuigi,Luigi-Wu,Ruigi
 0,2,Who was the first damsel in distress?,Daisy,Peach,Rosalina,Luigi
@@ -38,14 +38,14 @@
 2,1,Which series is a Sony exclusive?,Uncharted,Wipeout,Tomb Raider,Crash Bandicoot
 2,1,What was Sony's controller called on the PS2?,DualShock,DualShock 2,SixAxis,Move
 3,0,Who played Koopa in the SuperMario Bros. Movie?,Dennis Hopper,Bob Hoskins,Arnold Schwarzenegger,Wesley Snipes
-3,0,How many shops in Huddersfield sell N64 games?,1,2,0,3
+3,2,How many shops in Huddersfield sell N64 games?,1,2,0,3
 3,0,Who is the creator of the Spectrum?,Clive Sinclair,Alan Sugar,Chris Curry,Donald Trump
 3,0,Who was the CodeMasters mascot character?,Dizzy,Bubsy,Cool Spot,Johnny Bazookatone
 3,0,The Amiga home computer was developed by ...?,Commodore,Sinclair Radionics,Amstrad,Philips
 3,0,Which host of The Apprentice owns Amstrad?,Alan Sugar,Donald Trump,Arnold Swarzenegger,Jeremy Clarkson
 3,0,Before Grand Theft Auto what was DMA design's most popular series?,Lemmings,Body Harvest,UniRacers,Space Station Silicon Valley
 3,0,In the hit game Resident Evil who almost becomes a sandwich?,Jill,Barry,Chris,Wesker
-3,1,How many characters are in the original roster of Street Fighter 2?8,6,4,10
+3,1,How many characters are in the original roster of Street Fighter 2?,8,6,4,10
 3,1,Psygnosis became which studio in the year 2000?,Sony Studio Liverpool,Retro Studios,Rockstar Games,Team 17
 3,1,Studio Gobo creators of some of Disney's Infinity series are based where?,Brighton,York,London,Gilford
 3,0,Who was the head of Bullfrog games?,Peter Molyneux,Peter North,Peter Pan,Peter Rabbit
