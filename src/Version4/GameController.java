@@ -1,6 +1,10 @@
 package Version4;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,17 +12,34 @@ public class GameController extends DefaultListModel<Player> {
 
 
     private DefaultListModel<Player> players;
+
+    public ArrayList<Player> getPlayerRankings() {
+        return playerRankings;
+    }
+
+    private ArrayList<Player> playerRankings;
     private QuestionDatabase questionDatabase;
     private String[] currentQuestionOptions;
     private int difficulty;
     private int playersKicked;
 
+    public Font getTeletext() {
+        return teletext;
+    }
+
+    private Font teletext;
+
+
+    private String[] money;
     public DefaultListModel<String> getMoneyValues() {
         return moneyValues;
     }
 
     private DefaultListModel<String> moneyValues;
 
+    public String getMoneyValue(int i) {
+        return money[i];
+    }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
@@ -77,10 +98,36 @@ public class GameController extends DefaultListModel<Player> {
         difficulty = 0;
         playersKicked = 0;
         moneyValues = new DefaultListModel<>();
-        String[] money = {"$1 Zillion", "$500,000", "$250,000", "$125,000", "$64,000", "$32,000", "$16,000", "$8,000", "$4,000", "$2,000", "$1,000", "$500", "$300", "$200", "$100"};
+        money = new String[]{"$1 Zillion", "$500,000", "$250,000", "$125,000", "$64,000", "$32,000", "$16,000", "$8,000",
+                "$4,000", "$2,000", "$1,000", "$500", "$300", "$200", "$100", "$0"};
         for (int i = 0; i < money.length; i++) {
             moneyValues.addElement(money[i]);
+
         }
+
+        try {
+            File tele = new File("res/teletext_regular.ttf");
+
+            teletext = Font.createFont(Font.TRUETYPE_FONT, tele);
+
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find stupid file");
+
+        }catch(FontFormatException ex){
+            System.out.println("Error with Font");
+
+        }
+        catch (IOException ex) {
+            System.out.println("error reading file");
+        }
+
+
+        System.out.println(teletext);
+
+        GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        genv.registerFont(teletext);
+        teletext = teletext.deriveFont(30F);
     }
 
     public boolean checkAnswer(String guess) {
@@ -125,17 +172,17 @@ public class GameController extends DefaultListModel<Player> {
     }
 
     public void sortResults() {
-        ArrayList<Player> list = new ArrayList<>();
+        playerRankings = new ArrayList<>();
 
         for (int i = 0; i < players.size(); i++) {
-            list.add(players.getElementAt(i));
-            players.remove(i);
+            playerRankings.add(players.getElementAt(i));
+
         }
 
-        Collections.sort(list);
-        for (Player player : list) {
-            players.addElement(player);
-        }
+        Collections.sort(playerRankings);
+
+
+
     }
 
     public ArrayList<String> shuffleOptions(String[] currentQuestion) {

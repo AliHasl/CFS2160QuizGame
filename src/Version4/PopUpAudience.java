@@ -33,6 +33,12 @@ public class PopUpAudience extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        buttonOK.setFont(gameController.getTeletext());
+        buttonOK.setForeground(Color.WHITE);
+        option1label.setFont(gameController.getTeletext());
+        option2Label.setFont(gameController.getTeletext());
+        option3Label.setFont(gameController.getTeletext());
+        option4Label.setFont(gameController.getTeletext());
 
 
         buttonOK.addActionListener(new ActionListener() {
@@ -41,11 +47,7 @@ public class PopUpAudience extends JDialog {
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
