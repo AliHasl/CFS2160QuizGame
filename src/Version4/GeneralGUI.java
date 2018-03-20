@@ -359,6 +359,7 @@ public class GeneralGUI {
                     System.out.println("wong");
                     option1.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
+                    gameController.addToResultsList(currentPlayer);
                     gameController.kickPlayer();
                 }
 
@@ -378,6 +379,7 @@ public class GeneralGUI {
                     System.out.println("wong");
                     option2.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
+                    gameController.addToResultsList(currentPlayer);
                     gameController.kickPlayer();
                 }
             }
@@ -396,6 +398,7 @@ public class GeneralGUI {
                     System.out.println("wong");
                     option3.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
+                    gameController.addToResultsList(currentPlayer);
                     gameController.kickPlayer();
                 }
             }
@@ -415,6 +418,7 @@ public class GeneralGUI {
                     System.out.println("wong");
                     option4.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
+                    gameController.addToResultsList(currentPlayer);
                     gameController.kickPlayer();
 
                 }

@@ -22,6 +22,7 @@ public class GameController extends DefaultListModel<Player> {
     private String[] currentQuestionOptions;
     private int difficulty;
     private int playersKicked;
+    private int playersRemaining;
 
     public Font getTeletext() {
         return teletext;
@@ -92,7 +93,12 @@ public class GameController extends DefaultListModel<Player> {
         questionDatabase = new QuestionDatabase();
         questionDatabase.setAllCategoryQuestions();
         Player bob = new Player("bob");
+        Player fred = new Player("fred");
+        fred.setScore(14);
+        bob.setScore(14);
         players.addElement(bob);
+        players.addElement(fred);
+        playerRankings = new ArrayList<>();
         options = new ArrayList<>();
         playerIndex = 0;
         difficulty = 0;
@@ -171,13 +177,14 @@ public class GameController extends DefaultListModel<Player> {
         currentPlayer = players.get(playerIndex);
     }
 
+    public void addToResultsList(Player currentPlayer){
+        playerRankings.add(currentPlayer);
+    }
+
     public void sortResults() {
-        playerRankings = new ArrayList<>();
 
-        for (int i = 0; i < players.size(); i++) {
-            playerRankings.add(players.getElementAt(i));
 
-        }
+
 
         Collections.sort(playerRankings);
 
@@ -197,11 +204,20 @@ public class GameController extends DefaultListModel<Player> {
     }
 
     public Player endTurn() {
-        if (playersKicked == players.size()) {
+        playersRemaining = players.size() - playersKicked;
+
+        if(currentPlayer.getScore() == 15){
+            playerRankings.add(currentPlayer);
+
+        }
+
+        if (playersKicked == players.size() || playerRankings.size() == players.size()) {
             endGame = true;
             return null;
 
         }
+
+
         else{
             playerIndex ++;
             playerIndex = playerIndex % players.size();
@@ -214,6 +230,14 @@ public class GameController extends DefaultListModel<Player> {
         }
 
         currentPlayer = players.elementAt(playerIndex);
+
+        if(currentPlayer.getScore() >= 5 && currentPlayer.getScore() < 10) {
+            difficulty = 1;
+        }
+        if(currentPlayer.getScore() >=10)
+        {
+            difficulty = 2;
+        }
         return currentPlayer;
 
 
