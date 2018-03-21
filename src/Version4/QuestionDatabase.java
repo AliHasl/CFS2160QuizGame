@@ -12,19 +12,20 @@ public class QuestionDatabase {
     private ArrayList<String[]> category2;
     private ArrayList<String[]> category3;
     private ArrayList<String[]> category4;
-    private ArrayList<String[]> currentCategory;
     private String[] currentQuestion;
 
     public QuestionDatabase() {
 
-        category1 = new ArrayList<String[]>();
-        category2 = new ArrayList<String[]>();
-        category3 = new ArrayList<String[]>();
-        category4 = new ArrayList<String[]>();
+        category1 = new ArrayList<>();
+        category2 = new ArrayList<>();
+        category3 = new ArrayList<>();
+        category4 = new ArrayList<>();
 
     }
 
     public String[] getQuestionFromCategory(int category, int difficulty) {
+
+        ArrayList<String[]> currentCategory = new ArrayList<>();
 
         int count = 0;
         if (category == 0) {
@@ -42,7 +43,7 @@ public class QuestionDatabase {
 
         while (count < currentCategory.size()) {
 
-                if (Integer.valueOf(this.currentCategory.get(count)[1]) != difficulty) {
+                if (Integer.valueOf(currentCategory.get(count)[1]) != difficulty) {
                     count++;
                     continue;
 

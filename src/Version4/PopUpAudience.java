@@ -15,13 +15,12 @@ public class PopUpAudience extends JDialog {
     private JLabel option2Label;
     private JLabel option3Label;
     private JLabel option4Label;
-    private int difficulty;
+    private int questionDifficulty;
     private String answer;
     private int[] correctPercent;
     private int[] wrongPercent;
 
     public PopUpAudience(GameController gameController) {
-        GameController gc = gameController;
 
         setContentPane(contentPane);
         setModal(true);
@@ -43,13 +42,13 @@ public class PopUpAudience extends JDialog {
         option3Bar.setForeground(Color.BLUE);
         option4Bar.setForeground(Color.YELLOW);
 
-        option1label.setText(gc.getOptions().get(0));
-        option2Label.setText(gc.getOptions().get(1));
-        option3Label.setText(gc.getOptions().get(2));
-        option4Label.setText(gc.getOptions().get(3));
+        option1label.setText(gameController.getOptions().get(0));
+        option2Label.setText(gameController.getOptions().get(1));
+        option3Label.setText(gameController.getOptions().get(2));
+        option4Label.setText(gameController.getOptions().get(3));
 
-        difficulty = Integer.parseInt(gc.getCurrentQuestion()[1]);
-        answer = gc.getCurrentQuestion()[3];
+        questionDifficulty = Integer.parseInt(gameController.getCurrentQuestion()[1]);
+        answer = gameController.getCurrentQuestion()[3];
 
         correctPercent = new int[] {70,50,30};
         wrongPercent = new int[]{30,50,70};
@@ -57,28 +56,28 @@ public class PopUpAudience extends JDialog {
         System.out.println(answer);
 
         if(option1label.getText().equals(answer)){
-            option1Bar.setValue(correctPercent[difficulty]);
-            option2Bar.setValue(wrongPercent[difficulty]/3);
-            option3Bar.setValue(wrongPercent[difficulty]/3);
-            option4Bar.setValue(wrongPercent[difficulty]/3);
+            option1Bar.setValue(correctPercent[questionDifficulty]);
+            option2Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option3Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option4Bar.setValue(wrongPercent[questionDifficulty]/3);
         }
         else if(option2Label.getText().equals(answer)) {
-            option1Bar.setValue(wrongPercent[difficulty]/3);
-            option2Bar.setValue(correctPercent[difficulty]);
-            option3Bar.setValue(wrongPercent[difficulty] / 3);
-            option4Bar.setValue(wrongPercent[difficulty] / 3);
+            option1Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option2Bar.setValue(correctPercent[questionDifficulty]);
+            option3Bar.setValue(wrongPercent[questionDifficulty] / 3);
+            option4Bar.setValue(wrongPercent[questionDifficulty] / 3);
         }
         else if(option3Label.getText().equals(answer)) {
-            option1Bar.setValue(wrongPercent[difficulty]/3);
-            option2Bar.setValue(wrongPercent[difficulty] / 3);
-            option3Bar.setValue(correctPercent[difficulty]);
-            option4Bar.setValue(wrongPercent[difficulty] / 3);
+            option1Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option2Bar.setValue(wrongPercent[questionDifficulty] / 3);
+            option3Bar.setValue(correctPercent[questionDifficulty]);
+            option4Bar.setValue(wrongPercent[questionDifficulty] / 3);
         }
         else{
-                option1Bar.setValue(wrongPercent[difficulty] /3 );
-                option2Bar.setValue(wrongPercent[difficulty] / 3);
-                option3Bar.setValue(wrongPercent[difficulty] / 3);
-                option4Bar.setValue(correctPercent[difficulty]);
+                option1Bar.setValue(wrongPercent[questionDifficulty] /3 );
+                option2Bar.setValue(wrongPercent[questionDifficulty] / 3);
+                option3Bar.setValue(wrongPercent[questionDifficulty] / 3);
+                option4Bar.setValue(correctPercent[questionDifficulty]);
             }
 
         buttonOK.addActionListener(new ActionListener() {
