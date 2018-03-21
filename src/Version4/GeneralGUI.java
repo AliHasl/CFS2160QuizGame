@@ -441,7 +441,7 @@ public class GeneralGUI {
     //Sets the text for JLabels and JButtons to that of the current question
     public void formatQuestion(int category) {
         currentQuestion = gameController.getQuestion(category);
-        this.questionField.setText("<html>"+currentQuestion[2]+"</html>");
+        questionField.setText("<html>"+currentQuestion[2]+"</html>");
         ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
         option1.setText(options.get(0));
         option2.setText(options.get(1));
