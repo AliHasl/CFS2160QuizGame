@@ -67,6 +67,7 @@ public class GameController extends DefaultListModel<Player> {
 
     public void resetGameController() {
         players.clear();
+        playerRankings.clear();
         difficulty = 0;
         playersKicked = 0;
         endGame = false;
@@ -105,6 +106,7 @@ public class GameController extends DefaultListModel<Player> {
     public void resetScores() {
         difficulty = 0;
         playersKicked = 0;
+        playerRankings.clear();
         endGame = false;
         playerIndex = 0;
         for (int i = 0; i < players.size(); i++) {

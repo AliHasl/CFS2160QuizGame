@@ -53,105 +53,14 @@ public class GeneralGUI {
     private Player currentPlayer;
     private String[] currentQuestion;
 
-    /**
-     * Method to start the GUI
-     */
 
-    public void display() {
-        thisFrame = new JFrame("Bamboozle!");
-
-        //Sorts buttons into arrays to set the imported Font
-        JButton[] buttons = new JButton[]{startButton, backButton, startGameButton,addButton,removeButton,nintendoButton,
-        segaButton,sonyButton,generalKnowledgeButton,option1,option2, option3, option4, half50Button,askTheAudienceButton,
-        anotherGameButton,mainMenuButton, continueButton};
-
-        for (JButton jbut: buttons){
-            jbut.setFont(gameController.getTeletext());
-        }
-        //Sorts JLabels into arrays to set the imported Font
-        JLabel[] jLabels = new JLabel[]{categorySelectTitle, questionField,resultsTitle};
-        for (JLabel jlb: jLabels){
-            jlb.setFont(gameController.getTeletext());
-        }
-        //Sorts JLists into arrays to set the imported font.
-        JList[] jLists = new JList[]{moneyProgress,playerList};
-        for(JList jLt: jLists){
-            jLt.setFont(gameController.getTeletext());
-        }
-
-        thisFrame.setSize(GeneralGUI.getMinimumSize());
-        thisFrame.setMinimumSize(mainMenu.getMinimumSize());
-        thisFrame.setBackground(Color.BLACK);
-        thisFrame.setContentPane(mainMenu);
-        titleImagePanel.setSize(titleImagePanel.getMinimumSize());
-        thisFrame.pack();
-
-        //Imports and formats the title image
-        try {
-            BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
-            Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
-            JLabel titleImageLabel = new JLabel(new ImageIcon(stretchedImage));
-
-            titleImagePanel.add(titleImageLabel);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Unable to find stupid file");
-        } catch (IOException ex) {
-            System.out.println("error reading file");
-        }
-        thisFrame.setContentPane(mainMenu);
-        thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        thisFrame.setVisible(true);
-    }
-
-    private void setLifelineButtons(Player player) {
-        if (player.isHalfFifty()) {
-            half50Button.setEnabled(true);
-        } else {
-            half50Button.setEnabled(false);
-        }
-        if (player.isAskAudience()){
-            askTheAudienceButton.setEnabled(true);
-        }
-        else{
-            askTheAudienceButton.setEnabled(false);
-        }
-    }
-
-    //Sets the text for JLabels and JButtons to that of the current question
-    public void formatQuestion(int category) {
-        currentQuestion = gameController.getQuestion(category);
-        this.questionField.setText("<html>"+currentQuestion[2]+"</html>");
-        ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
-        option1.setText(options.get(0));
-        option2.setText(options.get(1));
-        option3.setText(options.get(2));
-        option4.setText(options.get(3));
-    }
-
-    private void resetQuestionPanel() {
-        continueButton.setEnabled(false);
-        option1.setEnabled(true);
-        option2.setEnabled(true);
-        option3.setEnabled(true);
-        option4.setEnabled(true);
-        option1.setBackground(null);
-        option2.setBackground(null);
-        option3.setBackground(null);
-        option4.setBackground(null);
-    }
-
-    private void questionAnswered() {
-        continueButton.setEnabled(true);
-        option1.setEnabled(false);
-        option2.setEnabled(false);
-        option3.setEnabled(false);
-        option4.setEnabled(false);
-    }
 
     /**
      * Constructor for the GUI
      * Initialises the gameController, question database and list model.
      */
+
+
 
     public GeneralGUI() {
 
@@ -375,6 +284,8 @@ public class GeneralGUI {
             }
         });
 
+        //Continue button controls gameflow. Here end game results are checked diverting flow to
+        //the next player or to the results screen.
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -385,12 +296,15 @@ public class GeneralGUI {
                     gameController.sortResults();
                     resultsTitle.setText("Game Over! How much did you win?");
                     resultDisplay.setLayout(new BoxLayout(resultDisplay,1));
+
+                    //Formats the results table to put players in order of winnings. BoxLayout is similar to flow but
+                    //puts JLables on top of each other.
                     for (int i = 0; i < gameController.getPlayerRankings().size();i++) {
 
                         System.out.println(gameController.getPlayers().getElementAt(i).getName());
                         System.out.println(gameController.getPlayers().getElementAt(i).getScore());
                         JLabel temp = new JLabel();
-                        temp.setText("" + gameController.getPlayerRankings().get(i).getName() + "-" +
+                        temp.setText("          " + (i +1) +". " + gameController.getPlayerRankings().get(i).getName() + " - " +
                                 gameController.getMoneyValue((15 - gameController.getPlayerRankings().get(i)
                                         .getScore())) + "\n");
                         temp.setFont(gameController.getTeletext());
@@ -412,67 +326,9 @@ public class GeneralGUI {
         half50Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Random rn = new Random();
-                int random = rn.nextInt(4) + 1;
 
-                int cycles = 0;
-                while (cycles < 2) {
-                    System.out.println(random);
-                    if (random == 1) {
-                        if (option1.isEnabled()) {
-                            if (gameController.checkAnswer(option1.getText())) {
-                                random = rn.nextInt(4) + 1;
-                            } else {
-                                option1.setEnabled(false);
-                                random = rn.nextInt(4) + 1;
-                                cycles++;
-                            }
+                halfFifty();
 
-                        } else {
-                            random = rn.nextInt(4) + 1;
-                        }
-                    } else if (random == 2) {
-                        if (option2.isEnabled()) {
-                            if (gameController.checkAnswer(option2.getText())) {
-                                random = rn.nextInt(4) + 1;
-                            } else {
-                                option2.setEnabled(false);
-                                random = rn.nextInt(4) + 1;
-                                cycles++;
-                            }
-                        } else {
-                            random = rn.nextInt(4) + 1;
-                        }
-                    } else if (random == 3) {
-                        if (option3.isEnabled()) {
-                            if (gameController.checkAnswer(option3.getText())) {
-                                random = rn.nextInt(4) + 1;
-                            } else {
-                                option3.setEnabled(false);
-                                random = rn.nextInt(4) + 1;
-                                cycles++;
-                            }
-                        } else {
-                            random = rn.nextInt(4) + 1;
-                        }
-                    } else if (random == 4) {
-
-                        if (option4.isEnabled()) {
-                            if (gameController.checkAnswer(option4.getText())) {
-                                random = rn.nextInt(4) + 1;
-                            } else {
-                                option4.setEnabled(false);
-                                random = rn.nextInt(4) + 1;
-                                cycles++;
-                            }
-                        } else {
-                            random = rn.nextInt(4) + 1;
-                        }
-                    }
-
-                }
-                currentPlayer.setHalfFifty(false);
-                half50Button.setEnabled(false);
             }
 
         });
@@ -516,5 +372,167 @@ public class GeneralGUI {
                 thisFrame.pack();
             }
         });
+    }
+
+    /**
+     * Method to start the GUI
+     */
+
+    public void display() {
+        thisFrame = new JFrame("Bamboozle!");
+
+        //Sorts buttons into arrays to set the imported Font
+        JButton[] buttons = new JButton[]{startButton, backButton, startGameButton,addButton,removeButton,nintendoButton,
+                segaButton,sonyButton,generalKnowledgeButton,option1,option2, option3, option4, half50Button,askTheAudienceButton,
+                anotherGameButton,mainMenuButton, continueButton};
+
+        for (JButton jbut: buttons){
+            jbut.setFont(gameController.getTeletext());
+        }
+        //Sorts JLabels into arrays to set the imported Font
+        JLabel[] jLabels = new JLabel[]{categorySelectTitle, questionField,resultsTitle};
+        for (JLabel jlb: jLabels){
+            jlb.setFont(gameController.getTeletext());
+        }
+        //Sorts JLists into arrays to set the imported font.
+        JList[] jLists = new JList[]{moneyProgress,playerList};
+        for(JList jLt: jLists){
+            jLt.setFont(gameController.getTeletext());
+        }
+
+        thisFrame.setSize(GeneralGUI.getMinimumSize());
+        thisFrame.setMinimumSize(mainMenu.getMinimumSize());
+        thisFrame.setBackground(Color.BLACK);
+        thisFrame.setContentPane(mainMenu);
+        titleImagePanel.setSize(titleImagePanel.getMinimumSize());
+        thisFrame.pack();
+
+        //Imports and formats the title image
+        try {
+            BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
+            Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
+            JLabel titleImageLabel = new JLabel(new ImageIcon(stretchedImage));
+
+            titleImagePanel.add(titleImageLabel);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find stupid file");
+        } catch (IOException ex) {
+            System.out.println("error reading file");
+        }
+        thisFrame.setContentPane(mainMenu);
+        thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        thisFrame.setVisible(true);
+    }
+
+    private void setLifelineButtons(Player player) {
+        if (player.isHalfFifty()) {
+            half50Button.setEnabled(true);
+        } else {
+            half50Button.setEnabled(false);
+        }
+        if (player.isAskAudience()){
+            askTheAudienceButton.setEnabled(true);
+        }
+        else{
+            askTheAudienceButton.setEnabled(false);
+        }
+    }
+
+    //Sets the text for JLabels and JButtons to that of the current question
+    public void formatQuestion(int category) {
+        currentQuestion = gameController.getQuestion(category);
+        this.questionField.setText("<html>"+currentQuestion[2]+"</html>");
+        ArrayList<String> options = gameController.shuffleOptions(currentQuestion);
+        option1.setText(options.get(0));
+        option2.setText(options.get(1));
+        option3.setText(options.get(2));
+        option4.setText(options.get(3));
+    }
+
+    private void resetQuestionPanel() {
+        continueButton.setEnabled(false);
+        option1.setEnabled(true);
+        option2.setEnabled(true);
+        option3.setEnabled(true);
+        option4.setEnabled(true);
+        option1.setBackground(null);
+        option2.setBackground(null);
+        option3.setBackground(null);
+        option4.setBackground(null);
+    }
+
+    private void questionAnswered() {
+        continueButton.setEnabled(true);
+        option1.setEnabled(false);
+        option2.setEnabled(false);
+        option3.setEnabled(false);
+        option4.setEnabled(false);
+    }
+
+    //Method for running HalfFifty lifeLine.
+    private void halfFifty(){
+        Random rn = new Random();
+        int random = rn.nextInt(4) + 1;
+
+
+        //Sets cycles to pick two incorrect answers.
+        int cycles = 0;
+        while (cycles < 2) {
+            System.out.println(random);
+            if (random == 1) {
+                if (option1.isEnabled()) {
+                    if (gameController.checkAnswer(option1.getText())) {
+                        random = rn.nextInt(4) + 1;
+                    } else {
+                        option1.setEnabled(false);
+                        random = rn.nextInt(4) + 1;
+                        cycles++;
+                    }
+
+                } else {
+                    random = rn.nextInt(4) + 1;
+                }
+            } else if (random == 2) {
+                if (option2.isEnabled()) {
+                    if (gameController.checkAnswer(option2.getText())) {
+                        random = rn.nextInt(4) + 1;
+                    } else {
+                        option2.setEnabled(false);
+                        random = rn.nextInt(4) + 1;
+                        cycles++;
+                    }
+                } else {
+                    random = rn.nextInt(4) + 1;
+                }
+            } else if (random == 3) {
+                if (option3.isEnabled()) {
+                    if (gameController.checkAnswer(option3.getText())) {
+                        random = rn.nextInt(4) + 1;
+                    } else {
+                        option3.setEnabled(false);
+                        random = rn.nextInt(4) + 1;
+                        cycles++;
+                    }
+                } else {
+                    random = rn.nextInt(4) + 1;
+                }
+            } else if (random == 4) {
+
+                if (option4.isEnabled()) {
+                    if (gameController.checkAnswer(option4.getText())) {
+                        random = rn.nextInt(4) + 1;
+                    } else {
+                        option4.setEnabled(false);
+                        random = rn.nextInt(4) + 1;
+                        cycles++;
+                    }
+                } else {
+                    random = rn.nextInt(4) + 1;
+                }
+            }
+
+        }
+        currentPlayer.setHalfFifty(false);
+        half50Button.setEnabled(false);
     }
 }
