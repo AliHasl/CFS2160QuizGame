@@ -198,6 +198,8 @@ public class GeneralGUI {
                 if (gameController.checkAnswer(option1.getText())) {
                     option1.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
 
 
                 } else {
@@ -206,6 +208,8 @@ public class GeneralGUI {
                     currentPlayer.setPlayerOut(true);
                     gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
                 }
 
             }
@@ -218,12 +222,16 @@ public class GeneralGUI {
                 if (gameController.checkAnswer(option2.getText())) {
                     option2.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
 
                 } else {
                     option2.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
                 }
             }
         });
@@ -235,12 +243,16 @@ public class GeneralGUI {
                 if (gameController.checkAnswer(option3.getText())) {
                     option3.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
 
                 } else {
                     option3.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
                     gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
                 }
             }
         });
@@ -253,6 +265,8 @@ public class GeneralGUI {
                 if (gameController.checkAnswer(option4.getText())) {
                     option4.setBackground(Color.GREEN);
                     currentPlayer.setScore(currentPlayer.getScore() + 1);
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
                 }
 
                 else {
@@ -260,6 +274,8 @@ public class GeneralGUI {
                     currentPlayer.setPlayerOut(true);
                     gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
+                    half50Button.setEnabled(false);
+                    askTheAudienceButton.setEnabled(false);
                 }
             }
         });
@@ -281,8 +297,6 @@ public class GeneralGUI {
                     //puts JLables on top of each other.
                     for (int i = 0; i < gameController.getPlayerRankings().size();i++) {
 
-                        System.out.println(gameController.getPlayers().getElementAt(i).getName());
-                        System.out.println(gameController.getPlayers().getElementAt(i).getScore());
                         JLabel temp = new JLabel();
                         temp.setText("          " + (i +1) +". " + gameController.getPlayerRankings().get(i).getName() + " - " +
                                 gameController.getMoneyValue((15 - gameController.getPlayerRankings().get(i)
@@ -307,6 +321,7 @@ public class GeneralGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 halfFifty();
+
             }
 
         });
@@ -467,7 +482,7 @@ public class GeneralGUI {
         //Sets cycles to pick two incorrect answers.
         int cycles = 0;
         while (cycles < 2) {
-            System.out.println(random);
+
             if (random == 1) {
                 if (option1.isEnabled()) {
                     if (gameController.checkAnswer(option1.getText())) {
