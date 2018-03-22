@@ -3,7 +3,7 @@
 0,0,What was Nintendo's most popular top down adventure game?,Zelda,Sonic,Double Dragon,StarFox
 0,0,Who was Mario's first victim?,Goomba,Koopa Troopa,Bowser,Bullet Bill
 0,1,How fast can a person complete Super Mario Bros.?,5 min,7 min,3 min,10 min
-0,1,How many buttons were on the NES controller?,2,4,6,8
+0,1,How many buttons were on the NES controller?,4,2,6,8
 0,1,Who was Nintendo's first villain?, Donkey Kong, Bowser, Dr Robotonik, LeChuck Threepwood
 0,1,Project Dolphin was the codename for which system?,GameCube,N64,Gameboy Advance,Super Nintendo
 0,1,How many Pokemons were available in the original Pokemons game?,151,200,75,500
@@ -24,12 +24,15 @@
 1,1,Where did Sega get its name?,Service Games,Super Entertaining Gaming Association,Super Games,Sonic Games
 1,1,What was Sega's original business?,Coin-operated games,Playing cards,Karaoke Boothes,Guns
 1,1,What was Sega's first handheld console called?,GameGear,Gameboy,Lynx,Nomad
+1,2,What is the colour of the American Dreamcast swirl?,orange,blue,black,red
 1,1,How does Sonic games run smoothly?,Blast processing,Hyper threading,Overclocking,Turbo mode
 1,2,Which series was left incomplete in 2001 and set for a return?,Shenmue,Jet Set Radio,Panzer Dragoon,Golden Axe
 1,2,Who was the Dwarf in Golden Axe?,Gilius Thunderhead, Ax Battler,Death Adder,Kain Grinder
 1,2,What was Sega's portable MegaDrive called?,Sega Nomad,GameGear,MegaDrive Portable,MegaCarry
 1,2,Which character was introduced in Sonic Advance 2?,Cream the Rabbit,Big the Cat,Amy the Hedgehog,Charmy the Bee
 1,2,When was Sega name created?,1965,1889,1950,1990
+1,2,What date was Sonic2sday?,29/11/1992,06/02/1992,13/04/1992,12/08/1992
+1,2,What was the final code name used for the Dreamcast?,Katana,Neptune,Pluto,Revolution
 2,0,What was Sony's first console?,Playstation,Playstation 2,Playstation 3, Playstation 4
 2,0,Psygnosis developed which game that would become a Playstation exclusive series?,Wipeout,Wetrix,Radiant Silvergun,Tomb Raider
 2,1,Who was Sony originally going to partner with for a console?,Nintendo,Sega,Philips,SNK
@@ -37,6 +40,9 @@
 2,0,Which was the first entry of the Final Fantasy series to debut on Playstation?,VII,VIII,VI,IX
 2,1,Which series is a Sony exclusive?,Uncharted,Wipeout,Tomb Raider,Crash Bandicoot
 2,2,What was Sony's controller called on the PS2?,DualShock 2,DualShock ,SixAxis,Move
+2,2,What was fancy about the Vita handheld screen?,OLED,UHD,bitmap,superscaling
+2,2,Which Metal Gear Solid is a playstation exclusive?,MGS4,MGS,MGS2,MGS3
+2,2,What was the name of the processor in the PS2?,Emotion Engine,The Cell,Motorolla 86000,Broadway
 3,0,Who played Koopa in the SuperMario Bros. Movie?,Dennis Hopper,Bob Hoskins,Arnold Schwarzenegger,Wesley Snipes
 3,2,How many shops in Huddersfield sell N64 games?,1,2,0,3
 3,0,Who is the creator of the Spectrum?,Clive Sinclair,Alan Sugar,Chris Curry,Donald Trump
@@ -53,5 +59,11 @@
 3,2,In the film Hackers which of these is not a common password?,1337,God,Sex,Money
 3,1,In which year was the Mortal Kombat film released?,1995,1999,1990,2018
 3,1,How many films are in the Resident Evil film series?,6,4,8,Too many!
+3,1,Where are the team Revolution Software based?,York,Leeds,Hull,Manchester
 3,1,Which famous director directed House of the Dead?,Uwe Bol, Steven Spielberg,Wes Anderson,Woody Allen
 3,2,What is the Rotten Tomatoes score for House of the Dead?,3%,16%,90%,7%
+3,2,What is the current Rotten Tomatoes score for the new Tomb Raider (2018)?,50%,30%,35%,13%
+3,2,Ada Lovelace is credited as being the first programmer but what was her favourite game?,Duke Nukem,Pong,Mortal Kombat,BMX XXX
+3,2,How much money would it take to purchase everything in Train Simulator 2015?,3000lbs,200lbs,1500lbs,800lbs
+3,2,In the hit film War Games how do you win?,Don't play,Cheat,Program,Money
+3,2,In the hit film Resident Evil which monster not in it?,Tyrant,Zombie,Zombie dog,Licker

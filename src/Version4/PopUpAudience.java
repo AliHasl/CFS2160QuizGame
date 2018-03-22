@@ -1,8 +1,11 @@
 package Version4;
-
+/**
+ * Created by u1773783 on 20/03/2018.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class PopUpAudience extends JDialog {
     private JPanel contentPane;
@@ -52,31 +55,34 @@ public class PopUpAudience extends JDialog {
 
         correctPercent = new int[] {70,50,30};
         wrongPercent = new int[]{30,50,70};
+        Random rand = new Random();
+        int deviation = rand.nextInt(10) +1;
+
 
         System.out.println(answer);
 
         if(option1label.getText().equals(answer)){
             option1Bar.setValue(correctPercent[questionDifficulty]);
-            option2Bar.setValue(wrongPercent[questionDifficulty]/3);
-            option3Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option2Bar.setValue((wrongPercent[questionDifficulty]/3) + deviation);
+            option3Bar.setValue((wrongPercent[questionDifficulty]/3) - deviation);
             option4Bar.setValue(wrongPercent[questionDifficulty]/3);
         }
         else if(option2Label.getText().equals(answer)) {
-            option1Bar.setValue(wrongPercent[questionDifficulty]/3);
+            option1Bar.setValue((wrongPercent[questionDifficulty]/3) + deviation);
             option2Bar.setValue(correctPercent[questionDifficulty]);
-            option3Bar.setValue(wrongPercent[questionDifficulty] / 3);
+            option3Bar.setValue((wrongPercent[questionDifficulty] / 3) - deviation);
             option4Bar.setValue(wrongPercent[questionDifficulty] / 3);
         }
         else if(option3Label.getText().equals(answer)) {
-            option1Bar.setValue(wrongPercent[questionDifficulty]/3);
-            option2Bar.setValue(wrongPercent[questionDifficulty] / 3);
+            option1Bar.setValue((wrongPercent[questionDifficulty]/3) + deviation);
+            option2Bar.setValue((wrongPercent[questionDifficulty] / 3) - deviation);
             option3Bar.setValue(correctPercent[questionDifficulty]);
             option4Bar.setValue(wrongPercent[questionDifficulty] / 3);
         }
         else{
-                option1Bar.setValue(wrongPercent[questionDifficulty] /3 );
+                option1Bar.setValue((wrongPercent[questionDifficulty] /3) + deviation );
                 option2Bar.setValue(wrongPercent[questionDifficulty] / 3);
-                option3Bar.setValue(wrongPercent[questionDifficulty] / 3);
+                option3Bar.setValue((wrongPercent[questionDifficulty] / 3) - deviation);
                 option4Bar.setValue(correctPercent[questionDifficulty]);
             }
 

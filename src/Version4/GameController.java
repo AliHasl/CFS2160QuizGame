@@ -1,5 +1,7 @@
 package Version4;
-
+/**
+ * Created by u1773783 on 20/03/2018.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -24,16 +26,11 @@ public class GameController extends DefaultListModel<Player> {
     private int playersKicked;
     private boolean endGame;
 
+
     public GameController() {
         players = new DefaultListModel<>();
         questionDatabase = new QuestionDatabase();
         questionDatabase.setAllCategoryQuestions();
-        Player bob = new Player("bob");
-        Player fred = new Player("fred");
-        fred.setScore(14);
-        bob.setScore(14);
-        players.addElement(bob);
-        players.addElement(fred);
         playerRankings = new ArrayList<>();
         options = new ArrayList<>();
         playerIndex = 0;
@@ -119,12 +116,11 @@ public class GameController extends DefaultListModel<Player> {
         currentPlayer = players.get(playerIndex);
     }
 
-    public void addToResultsList(Player currentPlayer){
+    public void addToRankingsList(Player currentPlayer){
         playerRankings.add(currentPlayer);
     }
 
-    public void sortResults() {
-
+    public void sortRankings() {
         Collections.sort(playerRankings);
     }
 
@@ -193,6 +189,13 @@ public class GameController extends DefaultListModel<Player> {
         }
     }
 
+    public void setEndGame(boolean endGame) {
+        this.endGame = endGame;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
     //Getters
     public DefaultListModel<Player> getPlayers() {
         return players;
@@ -201,6 +204,18 @@ public class GameController extends DefaultListModel<Player> {
     public String[] getQuestion( int category) {
         currentQuestion = questionDatabase.getQuestionFromCategory(category, difficulty);
         return currentQuestion;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public int getPlayersKicked() {
+        return playersKicked;
+    }
+
+    public boolean isEndGame() {
+        return endGame;
     }
 
     public Font getTeletext() {

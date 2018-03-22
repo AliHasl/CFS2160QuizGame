@@ -1,5 +1,7 @@
 package Version4;
-
+/**
+ * Created by u1773783 on 20/03/2018.
+ */
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
 
 public class GeneralGUI {
     private JPanel GeneralGUI;
@@ -54,13 +55,10 @@ public class GeneralGUI {
     private String[] currentQuestion;
 
 
-
     /**
      * Constructor for the GUI
      * Initialises the gameController, question database and list model.
      */
-
-
 
     public GeneralGUI() {
 
@@ -133,24 +131,6 @@ public class GeneralGUI {
                     categorySelectTitle.setText("Player " + currentPlayer.getName() + "'s turn.");
                     moneyProgress.setSelectedIndex((gameController.getMoneyValues().size() - currentPlayer.getScore()) - 1);
                     thisFrame.setContentPane(categorySelect);
-
-                    //Imports the images for the category select screen
-                    try {
-                        BufferedImage brianImage = ImageIO.read(new File("res/BamboozleFace.jpg"));
-                        Image stretchedImage = brianImage.getScaledInstance(busterFaceCat.getWidth(), busterFaceCat.getHeight(), Image.SCALE_DEFAULT);
-                        JLabel busterFaceLabel = new JLabel(new ImageIcon(stretchedImage));
-                        busterFaceCat.add(busterFaceLabel);
-
-                        BufferedImage topImage = ImageIO.read(new File("res/BamboozleTop.jpg"));
-                        Image elongatedImage = topImage.getScaledInstance(catTopPanel.getWidth(), catTopPanel.getHeight(), Image.SCALE_DEFAULT);
-                        JLabel catTopImageLabel = new JLabel(new ImageIcon(elongatedImage));
-                        catTopPanel.add(catTopImageLabel);
-
-                    } catch (FileNotFoundException ex) {
-                        System.out.println("Unable to find stupid file");
-                    } catch (IOException ex) {
-                        System.out.println("error reading file");
-                    }
                     thisFrame.pack();
                 }
             }
@@ -224,7 +204,7 @@ public class GeneralGUI {
 
                     option1.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
-                    gameController.addToResultsList(currentPlayer);
+                    gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
                 }
 
@@ -242,7 +222,7 @@ public class GeneralGUI {
                 } else {
                     option2.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
-                    gameController.addToResultsList(currentPlayer);
+                    gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
                 }
             }
@@ -259,7 +239,7 @@ public class GeneralGUI {
                 } else {
                     option3.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
-                    gameController.addToResultsList(currentPlayer);
+                    gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
                 }
             }
@@ -278,7 +258,7 @@ public class GeneralGUI {
                 else {
                     option4.setBackground(Color.RED);
                     currentPlayer.setPlayerOut(true);
-                    gameController.addToResultsList(currentPlayer);
+                    gameController.addToRankingsList(currentPlayer);
                     gameController.kickPlayer();
                 }
             }
@@ -293,7 +273,7 @@ public class GeneralGUI {
                 currentPlayer = gameController.endTurn();
                 if(gameController.checkEndOfGame()) {
                     thisFrame.setContentPane(resultsPanel);
-                    gameController.sortResults();
+                    gameController.sortRankings();
                     resultsTitle.setText("Game Over! How much did you win?");
                     resultDisplay.setLayout(new BoxLayout(resultDisplay,1));
 
@@ -326,9 +306,7 @@ public class GeneralGUI {
         half50Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 halfFifty();
-
             }
 
         });
@@ -400,15 +378,26 @@ public class GeneralGUI {
             jLt.setFont(gameController.getTeletext());
         }
 
+        //Sets the correct sizes for the frame.
         thisFrame.setSize(GeneralGUI.getMinimumSize());
-        thisFrame.setMinimumSize(mainMenu.getMinimumSize());
+        thisFrame.setMinimumSize(categorySelect.getMinimumSize());
         thisFrame.setBackground(Color.BLACK);
         thisFrame.setContentPane(mainMenu);
         titleImagePanel.setSize(titleImagePanel.getMinimumSize());
         thisFrame.pack();
 
-        //Imports and formats the title image
+        //Sets the images up for later
         try {
+            BufferedImage brianImage = ImageIO.read(new File("res/BamboozleFace.jpg"));
+            Image BamberImage = brianImage.getScaledInstance(360, 288, Image.SCALE_DEFAULT);
+            JLabel bamberFaceLabel = new JLabel(new ImageIcon(BamberImage));
+            busterFaceCat.add(bamberFaceLabel);
+
+            BufferedImage topImage = ImageIO.read(new File("res/BamboozleTop.jpg"));
+            Image elongatedImage = topImage.getScaledInstance(800, 20, Image.SCALE_DEFAULT);
+            JLabel catTopImageLabel = new JLabel(new ImageIcon(elongatedImage));
+            catTopPanel.add(catTopImageLabel);
+
             BufferedImage titleImage = ImageIO.read(new File("res/Bamboozle.jpg"));
             Image stretchedImage = titleImage.getScaledInstance(titleImagePanel.getWidth(), titleImagePanel.getHeight(), Image.SCALE_DEFAULT);
             JLabel titleImageLabel = new JLabel(new ImageIcon(stretchedImage));

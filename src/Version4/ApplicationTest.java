@@ -1,9 +1,54 @@
 package Version4;
-
 /**
  * Created by u1773783 on 20/03/2018.
  */
-public class TestApplication {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class ApplicationTest {
+
+    private static void questionDatabaseTest(){
+        QuestionDatabase questionDatabase = new QuestionDatabase();
+        questionDatabase.setAllCategoryQuestions();
+        String[] testQuestionParts1 = new String[7];
+        String[] testQuestionParts2 = new String[7];
+        File file = new File("res/Questions.txt");
+        try {
+            Scanner fileIn = new Scanner(file);
+            int count = 0;
+            while(count < 3){
+                testQuestionParts1 = fileIn.nextLine().split(",");
+                count++;
+            }
+            while(count < 12){
+                testQuestionParts2 = fileIn.nextLine().split(",");
+                count++;
+            }
+            fileIn.close();
+
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("TESTBOT-5000 cannot find File!");
+        }
+
+        System.out.println("Printing question from line 3");
+        System.out.println("Expected: What was Nintendo's most popular top down adventure game?");
+        System.out.println("Observed: "+testQuestionParts1[2]);
+        System.out.println("Printing answer from question 12");
+        System.out.println("Expected: 1889");
+        System.out.println("Observed: " + testQuestionParts2[3]);
+
+        if(testQuestionParts1[2].equals("What was Nintendo's most popular top down adventure game?") && testQuestionParts2[3].equals("1889"))
+        {
+            System.out.println("TESTBOT-5000 APPROVES FILE READING");
+            testBotApproves();
+        }
+        else{
+            System.out.println("ERROR - TESTBOT - ERROR");
+            throw new StackOverflowError();
+        } System.out.println();
+    }
 
     private static void playerCreationTest(){
         System.out.println("Running playerCreation Test");
@@ -17,6 +62,7 @@ public class TestApplication {
         if(testPlayer.getName() == "TESTBOT - 5000" && testPlayer.getScore() == 0 && testPlayer.isAskAudience() == true
                 && testPlayer.isHalfFifty() == true && testPlayer.isPlayerOut() == false) {
             System.out.println("TESTBOT-5000 APPROVES PLAYER CREATION");
+            testBotApproves();
         }
             else{
                 System.out.println("ERROR - TESTBOT - ERROR");
@@ -43,17 +89,27 @@ public class TestApplication {
         if(testPlayer.getScore() == 1 && testPlayer.isHalfFifty() == false && testPlayer.isAskAudience() == false
                 &&testPlayer.isPlayerOut() == true) {
             System.out.println("TESTBOT-5000 APPROVES PLAYER MODIFICATION");
+            testBotApproves();
         }
         else {
             System.out.println("ERROR - TESTBOT - ERROR");
             throw new StackOverflowError();
         }
+            System.out.println();
         }
 
-        private static void testGUI(){
-            GameController gameController = new GameController();
-        }
 
+
+        private static void testBotApproves(){
+            System.out.println( "                   _ \n" +
+                    "  ______________  | |\n" +
+                    " |              | | |___\n" +
+                    " |   O     O    | |  ___)\n" +
+                    " |  __________  | |  ___)\n" +
+                    " | |/\\/\\/\\/\\/\\| | |  ___)\n" +
+                    " | |/\\/\\/\\/\\/\\| | |  ___)\n" +
+                    "  --------------  ------\n");
+        }
 
     public static void main(String[] args) {
         System.out.println( "  ______________ \n" +
@@ -63,12 +119,14 @@ public class TestApplication {
                             " | |/\\/\\/\\/\\/\\| |\n" +
                             " | |/\\/\\/\\/\\/\\| |\n" +
                             "  --------------\n" +
-        "TESTBOT - 5000: Testing Application\n");
+        "TESTBOT - 5000: TESTING APPLICATION\n");
+
 
 
         playerCreationTest();
         playerModificationTest();
-        testGUI();
+        questionDatabaseTest();
+
     }
 
 
